@@ -1,0 +1,17 @@
+{
+  "name": "IQ Master - 100 Question Test",
+  "short_name": "IQ Master",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#eef3f8",
+  "theme_color": "#1769d1",
+  "description": "100 question IQ-style reasoning test",
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
