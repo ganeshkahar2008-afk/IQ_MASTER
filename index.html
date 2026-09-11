@@ -1,36 +1,544 @@
-<!doctype html><html lang="hi"><link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#1769d1"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>IQ Master V3</title><style>
-*{box-sizing:border-box}<script>
-if ("serviceWorker" in navigator) {
-  navigator.serviceWorker.register("sw.js");
+<!doctype html>
+<html lang="hi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<title>IQ Master</title>
+
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icon.png">
+<meta name="theme-color" content="#1769d1">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+<style>
+*{box-sizing:border-box}
+body{
+margin:0;
+font-family:Arial,sans-serif;
+background:#eef3f8;
+color:#172033
 }
-</script>body{margin:0;font-family:Arial,sans-serif;background:#eef3f8;color:#172033}.wrap{max-width:720px;margin:auto;padding:16px}.card{background:#fff;border-radius:20px;padding:22px;box-shadow:0 5px 25px #0002}.center{text-align:center;padding:40px 20px}button{border:0;border-radius:12px;padding:13px 16px;background:#1769d1;color:#fff;font-size:16px;margin:6px 0;cursor:pointer}.full{width:100%}.dark{background:#172033}.hidden{display:none}.top{display:flex;justify-content:space-between;font-weight:bold}.opt{display:block;width:100%;text-align:left;background:#f0f3f7;color:#172033}.sel{outline:3px solid #1769d1;background:#e4efff}.nav{display:flex;gap:8px}.nav button{flex:1}.dots{display:flex;flex-wrap:wrap;gap:4px;margin-top:15px}.dot{width:31px;height:31px;padding:0;margin:0;font-size:12px}.done{background:#b8dfbf}.cur{outline:2px solid #1769d1}.stat{display:grid;grid-template-columns:1fr 1fr;gap:10px}.stat div{background:#f2f5f8;padding:15px;border-radius:12px;text-align:center}.big{font-size:34px;font-weight:bold}.small{color:#667085;font-size:14px}@media(max-width:500px){.card{padding:16px}}</style></head><body><div class="wrap">
-<div id="home" class="card center"><div style="font-size:58px">🧠</div><h1>IQ Master</h1><p class="small">100 प्रश्नों का IQ-style reasoning test</p><p>⏱️ 30 मिनट &nbsp; • &nbsp; 📝 100 प्रश्न</p><button class="full" onclick="start()">START TEST</button><p id="best" class="small"></p></div>
-<div id="quiz" class="card hidden"><div class="top"><span id="pg"></span><span id="timer">30:00</span></div><h2 id="q"></h2><div id="ops"></div><div class="nav"><button class="dark" onclick="prev()">← पिछला</button><button onclick="next()">अगला →</button></div><div id="dots" class="dots"></div></div>
-<div id="result" class="card hidden"><h2>🎉 Test पूरा हुआ</h2><div class="stat"><div><div id="score" class="big"></div>Score</div><div><div id="pct" class="big"></div>Percentage</div></div><h2 id="cat"></h2><p id="breakdown"></p><p class="small">यह IQ-style reasoning test है, official/clinical IQ assessment नहीं।</p><button class="full" onclick="location.reload()">🔄 Retest</button></div>
-</div><script>
+.wrap{
+max-width:720px;
+margin:auto;
+padding:16px
+}
+.card{
+background:#fff;
+border-radius:20px;
+padding:22px;
+box-shadow:0 5px 25px #0002
+}
+.center{
+text-align:center;
+padding:40px 20px
+}
+button{
+border:0;
+border-radius:12px;
+padding:13px 16px;
+background:#1769d1;
+color:#fff;
+font-size:16px;
+margin:6px 0;
+cursor:pointer
+}
+.full{width:100%}
+.dark{background:#172033}
+.hidden{display:none}
+.top{
+display:flex;
+justify-content:space-between;
+font-weight:bold
+}
+.opt{
+display:block;
+width:100%;
+text-align:left;
+background:#f0f3f7;
+color:#172033
+}
+.sel{
+outline:3px solid #1769d1;
+background:#e4efff
+}
+.nav{
+display:flex;
+gap:8px
+}
+.nav button{
+flex:1
+}
+.dots{
+display:flex;
+flex-wrap:wrap;
+gap:4px;
+margin-top:15px
+}
+.dot{
+width:31px;
+height:31px;
+padding:0;
+margin:0;
+font-size:12px
+}
+.done{background:#b8dfbf}
+.cur{outline:2px solid #1769d1}
+.stat{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:10px
+}
+.stat div{
+background:#f2f5f8;
+padding:15px;
+border-radius:12px;
+text-align:center
+}
+.big{
+font-size:34px;
+font-weight:bold
+}
+.small{
+color:#667085;
+font-size:14px
+}
+@media(max-width:500px){
+.card{padding:16px}
+}
+</style>
+</head>
+
+<body>
+
+<div class="wrap">
+
+<div id="home" class="card center">
+
+<div style="font-size:58px">🧠</div>
+
+<h1>IQ Master</h1>
+
+<p class="small">
+100 प्रश्नों का IQ-style reasoning test
+</p>
+
+<p>
+⏱️ 30 मिनट &nbsp; • &nbsp; 📝 100 प्रश्न
+</p>
+
+<button class="full" onclick="start()">
+START TEST
+</button>
+
+<p id="best" class="small"></p>
+
+</div>
+
+
+<div id="quiz" class="card hidden">
+
+<div class="top">
+<span id="pg"></span>
+<span id="timer">30:00</span>
+</div>
+
+<h2 id="q"></h2>
+
+<div id="ops"></div>
+
+<div class="nav">
+<button class="dark" onclick="prev()">← पिछला</button>
+<button onclick="next()">अगला →</button>
+</div>
+
+<div id="dots" class="dots"></div>
+
+</div>
+
+
+<div id="result" class="card hidden">
+
+<h2>🎉 Test पूरा हुआ</h2>
+
+<div class="stat">
+
+<div>
+<div id="score" class="big"></div>
+Score
+</div>
+
+<div>
+<div id="pct" class="big"></div>
+Percentage
+</div>
+
+</div>
+
+<h2 id="cat"></h2>
+
+<p id="breakdown"></p>
+
+<p class="small">
+यह IQ-style reasoning test है,
+official/clinical IQ assessment नहीं।
+</p>
+
+<button class="full" onclick="location.reload()">
+🔄 Retest
+</button>
+
+</div>
+
+</div>
+
+
+<script>
+
 const raw=[
-["2,4,8,16,?",["24","32","30","36"],1,"Number Series"],["3,6,12,24,?",["36","42","48","52"],2,"Number Series"],["5,10,17,26,?",["35","37","39","41"],1,"Number Series"],["81,27,9,3,?",["0","1","2","1.5"],1,"Number Series"],["1,4,9,16,25,?",["30","36","40","49"],1,"Number Series"],["2,6,12,20,30,?",["40","42","44","46"],1,"Number Series"],["1,1,2,3,5,8,?",["11","12","13","15"],2,"Number Series"],["64,32,16,8,?",["2","4","6","12"],1,"Number Series"],["11,22,44,88,?",["132","154","176","180"],2,"Number Series"],["121,144,169,196,?",["216","225","236","256"],1,"Number Series"],
-["2,3,5,8,12,17,?",["21","22","23","24"],2,"Number Series"],["12,15,21,30,42,?",["54","55","57","60"],2,"Number Series"],["50,45,35,20,?",["10","5","0","-5"],2,"Number Series"],["15,20,30,45,?",["55","60","65","70"],1,"Number Series"],["4,7,13,25,?",["37","43","49","51"],2,"Number Series"],
-["8:64 :: 7:?",["42","49","56","63"],1,"Analogy"],["3:27 :: 4:?",["16","32","64","81"],2,"Analogy"],["पुस्तक:पढ़ना :: भोजन:?",["बनाना","खाना","खरीदना","पकाना"],1,"Analogy"],["हाथ:दस्ताना :: पैर:?",["टोपी","जूता","कमीज","बेल्ट"],1,"Analogy"],["पिता की बहन?",["मामी","बुआ","मौसी","चाची"],1,"Analogy"],
-["माँ के भाई का बेटा?",["भाई","मामा","ममेरा भाई","चचेरा भाई"],2,"Analogy"],["CAT=24, DOG=?",["24","26","27","28"],1,"Analogy"],["A=1,B=2,C=3, CAB=?",["312","321","123","213"],0,"Coding"],["PEN=123, P=?",["1","2","3","निश्चित नहीं"],0,"Coding"],["SOUTH उल्टा?",["HTUOS","HTOUS","HTOSU","TUOSH"],0,"Coding"],
-["A,C,E,G,?",["H","I","J","K"],1,"Verbal"],["Z,X,V,T,?",["R","S","Q","P"],0,"Verbal"],["अलग कौन है?",["आम","केला","गाजर","सेब"],2,"Classification"],["अलग कौन है?",["2","3","5","9"],3,"Classification"],
-["राम>श्याम>मोहन, सबसे छोटा?",["राम","श्याम","मोहन","निश्चित नहीं"],2,"Logic"],["सोमवार से 10 दिन बाद?",["बुधवार","गुरुवार","शुक्रवार","शनिवार"],1,"Logic"],["कल रविवार था, परसों?",["सोमवार","मंगलवार","बुधवार","शनिवार"],1,"Logic"],["बाएँ 7वाँ, दाएँ 9वाँ। कुल?",["15","16","17","18"],1,"Logic"],["6 लोग, हर जोड़ी handshake। कुल?",["12","15","18","20"],1,"Logic"],["10 लोग, हर जोड़ी एक बार मिली। कुल?",["40","45","50","90"],1,"Logic"],
-["सभी गुलाब फूल हैं। निश्चित?",["सभी लाल","कोई लाल नहीं","गुलाब फूल हैं","सभी लाल गुलाब"],2,"Logic"],["उत्तर 5m फिर दाएँ 5m: दिशा?",["उत्तर-पश्चिम","उत्तर-पूर्व","दक्षिण-पश्चिम","दक्षिण-पूर्व"],1,"Logic"],["5 मशीनें 5 मिनट में 5 वस्तुएँ। 1 मशीन?",["1","5","10","25"],0,"Logic"],["4 कोनों में 1-1 बिल्ली। कुल?",["2","3","4","8"],2,"Logic"],
-["7+3×2=?",["20","13","17","14"],1,"Math"],["100 का 25%?",["20","25","30","35"],1,"Math"],["√144=?",["10","11","12","14"],2,"Math"],["दोगुना 18 है। संख्या?",["6","8","9","12"],2,"Math"],["वर्ग भुजा 5cm, क्षेत्रफल?",["10","20","25","30"],2,"Math"],
-["बेटा 10, पिता 25 वर्ष बड़े। पिता?",["30","35","40","45"],1,"Math"],["1 दर्जन=12, 3 दर्जन?",["24","30","36","42"],2,"Math"],["3 बजे कोण?",["60°","90°","120°","180°"],1,"Math"],["5+5=25,6+6=36,7+7=?",["14","42","49","56"],2,"Pattern"],["1=3,2=6,3=9,10=?",["20","27","30","33"],2,"Pattern"]
+
+["2,4,8,16,?",["24","32","30","36"],1,"Number Series"],
+["3,6,12,24,?",["36","42","48","52"],2,"Number Series"],
+["5,10,17,26,?",["35","37","39","41"],1,"Number Series"],
+["81,27,9,3,?",["0","1","2","1.5"],1,"Number Series"],
+["1,4,9,16,25,?",["30","36","40","49"],1,"Number Series"],
+["2,6,12,20,30,?",["40","42","44","46"],1,"Number Series"],
+["1,1,2,3,5,8,?",["11","12","13","15"],2,"Number Series"],
+["64,32,16,8,?",["2","4","6","12"],1,"Number Series"],
+["11,22,44,88,?",["132","154","176","180"],2,"Number Series"],
+["121,144,169,196,?",["216","225","236","256"],1,"Number Series"],
+
+["2,3,5,8,12,17,?",["21","22","23","24"],2,"Number Series"],
+["12,15,21,30,42,?",["54","55","57","60"],2,"Number Series"],
+["50,45,35,20,?",["10","5","0","-5"],2,"Number Series"],
+["15,20,30,45,?",["55","60","65","70"],1,"Number Series"],
+["4,7,13,25,?",["37","43","49","51"],2,"Number Series"],
+
+["8:64 :: 7:?",["42","49","56","63"],1,"Analogy"],
+["3:27 :: 4:?",["16","32","64","81"],2,"Analogy"],
+["पुस्तक:पढ़ना :: भोजन:?",["बनाना","खाना","खरीदना","पकाना"],1,"Analogy"],
+["हाथ:दस्ताना :: पैर:?",["टोपी","जूता","कमीज","बेल्ट"],1,"Analogy"],
+["पिता की बहन?",["मामी","बुआ","मौसी","चाची"],1,"Analogy"],
+["माँ के भाई का बेटा?",["भाई","मामा","ममेरा भाई","चचेरा भाई"],2,"Analogy"],
+["CAT=24, DOG=?",["24","26","27","28"],1,"Analogy"],
+
+["A=1,B=2,C=3, CAB=?",["312","321","123","213"],0,"Coding"],
+["PEN=123, P=?",["1","2","3","निश्चित नहीं"],0,"Coding"],
+["SOUTH उल्टा?",["HTUOS","HTOUS","HTOSU","TUOSH"],0,"Coding"],
+
+["A,C,E,G,?",["H","I","J","K"],1,"Verbal"],
+["Z,X,V,T,?",["R","S","Q","P"],0,"Verbal"],
+
+["अलग कौन है?",["आम","केला","गाजर","सेब"],2,"Classification"],
+["अलग कौन है?",["2","3","5","9"],3,"Classification"],
+
+["राम>श्याम>मोहन, सबसे छोटा?",["राम","श्याम","मोहन","निश्चित नहीं"],2,"Logic"],
+["सोमवार से 10 दिन बाद?",["बुधवार","गुरुवार","शुक्रवार","शनिवार"],1,"Logic"],
+["कल रविवार था, परसों?",["सोमवार","मंगलवार","बुधवार","शनिवार"],1,"Logic"],
+["बाएँ 7वाँ, दाएँ 9वाँ। कुल?",["15","16","17","18"],1,"Logic"],
+["6 लोग, हर जोड़ी handshake। कुल?",["12","15","18","20"],1,"Logic"],
+["10 लोग, हर जोड़ी एक बार मिली। कुल?",["40","45","50","90"],1,"Logic"],
+["सभी गुलाब फूल हैं। निश्चित?",["सभी लाल","कोई लाल नहीं","गुलाब फूल हैं","सभी लाल गुलाब"],2,"Logic"],
+["उत्तर 5m फिर दाएँ 5m: दिशा?",["उत्तर-पश्चिम","उत्तर-पूर्व","दक्षिण-पश्चिम","दक्षिण-पूर्व"],1,"Logic"],
+["5 मशीनें 5 मिनट में 5 वस्तुएँ। 1 मशीन?",["1","5","10","25"],0,"Logic"],
+["4 कोनों में 1-1 बिल्ली। कुल?",["2","3","4","8"],2,"Logic"],
+
+["7+3×2=?",["20","13","17","14"],1,"Math"],
+["100 का 25%?",["20","25","30","35"],1,"Math"],
+["√144=?",["10","11","12","14"],2,"Math"],
+["दोगुना 18 है। संख्या?",["6","8","9","12"],2,"Math"],
+["वर्ग भुजा 5cm, क्षेत्रफल?",["10","20","25","30"],2,"Math"],
+["बेटा 10, पिता 25 वर्ष बड़े। पिता?",["30","35","40","45"],1,"Math"],
+["1 दर्जन=12, 3 दर्जन?",["24","30","36","42"],2,"Math"],
+["3 बजे कोण?",["60°","90°","120°","180°"],1,"Math"],
+
+["5+5=25,6+6=36,7+7=?",["14","42","49","56"],2,"Pattern"],
+["1=3,2=6,3=9,10=?",["20","27","30","33"],2,"Pattern"]
+
 ];
-while(raw.length<100){let k=raw.length+1;let n=k%10+2;let type=["Number Series","Logic","Pattern","Math","Classification"][k%5];let q,a;
-if(type==="Number Series"){q=`${n}, ${n+2}, ${n+4}, ${n+6}, ?`;a=[String(n+6),String(n+8),String(n+10),String(n+12)];raw.push([q,a,1,type])}
-else if(type==="Math"){q=`${k} का ${k} से गुणनफल क्या है?`;a=[String(k+k),String(k*k),String(k*3),String(k+10)];raw.push([q,a,1,type])}
-else if(type==="Pattern"){q=`यदि नियम में हर संख्या को 3 से गुणा किया जाए, तो ${n} = ?`;a=[String(n+2),String(n*3),String(n*2),String(n+3)];raw.push([q,a,1,type])}
-else if(type==="Classification"){q="अलग कौन है?";a=["सेब","आम","गाजर","केला"];raw.push([q,a,2,type])}
-else{q=`यदि A, B से लंबा है और B, C से लंबा है, तो सबसे छोटा कौन?`;a=["A","B","C","निश्चित नहीं"];raw.push([q,a,2,type])}}
-let i=0,ans=Array(100).fill(-1),sec=1800,t;
+
+
+while(raw.length<100){
+
+let k=raw.length+1;
+let n=k%10+2;
+let type=["Number Series","Logic","Pattern","Math","Classification"][k%5];
+let q,a;
+
+if(type==="Number Series"){
+
+q=`${n}, ${n+2}, ${n+4}, ${n+6}, ?`;
+
+a=[
+String(n+6),
+String(n+8),
+String(n+10),
+String(n+12)
+];
+
+raw.push([q,a,1,type]);
+
+}
+
+else if(type==="Math"){
+
+q=`${k} का ${k} से गुणनफल क्या है?`;
+
+a=[
+String(k+k),
+String(k*k),
+String(k*3),
+String(k+10)
+];
+
+raw.push([q,a,1,type]);
+
+}
+
+else if(type==="Pattern"){
+
+q=`यदि नियम में हर संख्या को 3 से गुणा किया जाए, तो ${n} = ?`;
+
+a=[
+String(n+2),
+String(n*3),
+String(n*2),
+String(n+3)
+];
+
+raw.push([q,a,1,type]);
+
+}
+
+else if(type==="Classification"){
+
+q="अलग कौन है?";
+
+a=[
+"सेब",
+"आम",
+"गाजर",
+"केला"
+];
+
+raw.push([q,a,2,type]);
+
+}
+
+else{
+
+q=`यदि A, B से लंबा है और B, C से लंबा है, तो सबसे छोटा कौन?`;
+
+a=[
+"A",
+"B",
+"C",
+"निश्चित नहीं"
+];
+
+raw.push([q,a,2,type]);
+
+}
+
+}
+
+
+let i=0;
+let ans=Array(100).fill(-1);
+let sec=1800;
+let t;
+
+
 const $=x=>document.getElementById(x);
-function start(){$("home").classList.add("hidden");$("quiz").classList.remove("hidden");show();t=setInterval(()=>{sec--;timer.textContent=String(Math.floor(sec/60)).padStart(2,"0")+":"+String(sec%60).padStart(2,"0");if(sec<=0)finish()},1000)}
-function show(){pg.textContent=`प्रश्न ${i+1}/100`;q.textContent=raw[i][0];ops.innerHTML=raw[i][1].map((x,k)=>`<button class="opt ${ans[i]===k?"sel":""}" onclick="pick(${k})">${String.fromCharCode(65+k)}. ${x}</button>`).join("");dots.innerHTML=raw.map((_,k)=>`<button class="dot ${ans[k]>=0?"done":""} ${k===i?"cur":""}" onclick="jump(${k})">${k+1}</button>`).join("")}
-function pick(k){ans[i]=k;show()}function jump(k){i=k;show()}function prev(){if(i){i--;show()}}function next(){if(i<99){i++;show()}else finish()}
-function finish(){clearInterval(t);let s=ans.reduce((z,x,j)=>z+(x===raw[j][2]),0),cats={};raw.forEach((x,j)=>{cats[x[3]]??={c:0,t:0};cats[x[3]].t++;if(ans[j]===x[2])cats[x[3]].c++});localStorage.iqBest=Math.max(s,+(localStorage.iqBest||0));$("quiz").classList.add("hidden");$("result").classList.remove("hidden");$("score").textContent=s+"/100";$("pct").textContent=s+"%";$("cat").textContent=s>=90?"🌟 बहुत उत्कृष्ट":s>=75?"👏 बहुत अच्छा":s>=60?"👍 अच्छा":s>=40?"🙂 औसत":"📚 अधिक अभ्यास की जरूरत";$("breakdown").innerHTML=Object.entries(cats).map(([k,v])=>`${k}: ${v.c}/${v.t}`).join("<br>")}
-$("best").textContent="🏆 Best Score: "+(localStorage.iqBest||0)+"/100";
-</script></body></html>
+
+
+function start(){
+
+$("home").classList.add("hidden");
+
+$("quiz").classList.remove("hidden");
+
+show();
+
+t=setInterval(()=>{
+
+sec--;
+
+$("timer").textContent=
+String(Math.floor(sec/60)).padStart(2,"0")
++
+":"
++
+String(sec%60).padStart(2,"0");
+
+if(sec<=0)finish();
+
+},1000);
+
+}
+
+
+function show(){
+
+$("pg").textContent=`प्रश्न ${i+1}/100`;
+
+$("q").textContent=raw[i][0];
+
+$("ops").innerHTML=
+raw[i][1].map((x,k)=>
+`<button class="opt ${ans[i]===k?"sel":""}" onclick="pick(${k})">
+${String.fromCharCode(65+k)}. ${x}
+</button>`
+).join("");
+
+$("dots").innerHTML=
+raw.map((_,k)=>
+`<button class="dot ${ans[k]>=0?"done":""} ${k===i?"cur":""}" onclick="jump(${k})">
+${k+1}
+</button>`
+).join("");
+
+}
+
+
+function pick(k){
+
+ans[i]=k;
+
+show();
+
+}
+
+
+function jump(k){
+
+i=k;
+
+show();
+
+}
+
+
+function prev(){
+
+if(i){
+
+i--;
+
+show();
+
+}
+
+}
+
+
+function next(){
+
+if(i<99){
+
+i++;
+
+show();
+
+}
+
+else{
+
+finish();
+
+}
+
+}
+
+
+function finish(){
+
+clearInterval(t);
+
+let s=ans.reduce(
+(z,x,j)=>z+(x===raw[j][2]),
+0
+);
+
+let cats={};
+
+raw.forEach((x,j)=>{
+
+cats[x[3]]??={c:0,t:0};
+
+cats[x[3]].t++;
+
+if(ans[j]===x[2]){
+
+cats[x[3]].c++;
+
+}
+
+});
+
+
+localStorage.iqBest=
+Math.max(
+s,
++(localStorage.iqBest||0)
+);
+
+
+$("quiz").classList.add("hidden");
+
+$("result").classList.remove("hidden");
+
+$("score").textContent=s+"/100";
+
+$("pct").textContent=s+"%";
+
+$("cat").textContent=
+s>=90
+?"🌟 बहुत उत्कृष्ट"
+:s>=75
+?"👏 बहुत अच्छा"
+:s>=60
+?"👍 अच्छा"
+:s>=40
+?"🙂 औसत"
+:"📚 अधिक अभ्यास की जरूरत";
+
+
+$("breakdown").innerHTML=
+Object.entries(cats)
+.map(([k,v])=>`${k}: ${v.c}/${v.t}`)
+.join("<br>");
+
+}
+
+
+$("best").textContent=
+"🏆 Best Score: "
++
+(localStorage.iqBest||0)
++
+"/100";
+
+</script>
+
+
+<script>
+
+if("serviceWorker" in navigator){
+
+navigator.serviceWorker.register("./sw.js")
+.then(()=>{
+console.log("Service Worker Registered");
+})
+.catch(error=>{
+console.log("Service Worker Error:",error);
+});
+
+}
+
+</script>
+
+</body>
+</html>
