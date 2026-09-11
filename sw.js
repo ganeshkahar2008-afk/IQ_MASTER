@@ -1,4 +1,4 @@
-const CACHE = "iq-master-v3";
+const CACHE = "iq-master-v4";
 
 const ASSETS = [
   "./",
