@@ -1,11 +1,11 @@
-const CACHE = "iq-master-v4";
+const CACHE = "iq-master-v5";
 
 const ASSETS = [
   "./",
   "./index.html",
   "./manifest.json",
   "./sw.js",
-  "./icon.png"
+  "./icon.svg"
 ];
 
 self.addEventListener("install", event => {
