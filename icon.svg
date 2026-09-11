@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+
+  <!-- Background -->
+  <rect width="512" height="512" rx="90" fill="#061b45"/>
+
+  <!-- Blue border -->
+  <rect x="8" y="8" width="496" height="496" rx="82"
+        fill="none" stroke="#00aaff" stroke-width="10"/>
+
+  <!-- Gold circle -->
+  <circle cx="256" cy="190" r="145"
+          fill="#08285c" stroke="#f5c542" stroke-width="7"/>
+
+  <!-- Brain / bulb -->
+  <path d="M210 180
+           C180 145 195 95 235 82
+           C250 55 285 55 300 82
+           C340 95 355 145 325 180
+           C315 195 300 205 300 225
+           L212 225
+           C212 205 197 195 210 180Z"
+        fill="#168cff" stroke="#f5c542" stroke-width="6"/>
+
+  <!-- Brain divider -->
+  <path d="M256 78 L256 220"
+        stroke="#f5c542" stroke-width="6"/>
+
+  <!-- Brain lines -->
+  <path d="M220 105 Q245 120 220 140
+           M215 155 Q245 165 220 185
+           M292 105 Q267 120 292 140
+           M297 155 Q267 165 292 185"
+        fill="none" stroke="#ffffff" stroke-width="7"
+        stroke-linecap="round"/>
+
+  <!-- Light bulb base -->
+  <rect x="218" y="225" width="76" height="15"
+        rx="7" fill="#f5c542"/>
+  <rect x="222" y="244" width="68" height="14"
+        rx="7" fill="#f5c542"/>
+  <rect x="230" y="263" width="52" height="12"
+        rx="6" fill="#f5c542"/>
+
+  <!-- Book -->
+  <path d="M70 330 Q155 285 256 350
+           Q357 285 442 330
+           L442 385 Q350 345 256 405
+           Q162 345 70 385Z"
+        fill="#ffffff" stroke="#f5c542" stroke-width="6"/>
+
+  <path d="M256 350 L256 405"
+        stroke="#1769d1" stroke-width="6"/>
+
+  <!-- IQ MASTER -->
+  <text x="256" y="435"
+        text-anchor="middle"
+        font-family="Arial,sans-serif"
+        font-size="48"
+        font-weight="900"
+        fill="#ffffff"
+        stroke="#f5c542"
+        stroke-width="1">
+    IQ MASTER
+  </text>
+
+  <!-- by KASHYAP -->
+  <text x="256" y="475"
+        text-anchor="middle"
+        font-family="Arial,sans-serif"
+        font-size="22"
+        font-weight="700"
+        fill="#f5c542">
+    by KASHYAP
+  </text>
+
+</svg>
