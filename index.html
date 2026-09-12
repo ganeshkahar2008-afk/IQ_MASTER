@@ -618,6 +618,71 @@ console.log("Service Worker Error:",error);
       user ? "IQ Master: Logged in" : "IQ Master: Not logged in"
     );
   });
-</script>
+  const emailInput = document.getElementById("loginEmail");
+  const passwordInput = document.getElementById("loginPassword");
+  const loginBtn = document.getElementById("loginBtn");
+  const signupBtn = document.getElementById("signupBtn");
+  const logoutBtn = document.getElementById("logoutBtn");
+  const message = document.getElementById("loginMessage");
+  const title = document.getElementById("loginTitle");
+
+  loginBtn.addEventListener("click", async () => {
+    const email = emailInput.value.trim();
+    const password = passwordInput.value;
+
+    if (!email || !password) {
+      message.textContent = "Email और Password डालें";
+      return;
+    }
+
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+      message.textContent = "Login सफल! ✅";
+    } catch (error) {
+      message.textContent = "Login failed: " + error.message;
+    }
+  });
+
+  signupBtn.addEventListener("click", async () => {
+    const email = emailInput.value.trim();
+    const password = passwordInput.value;
+
+    if (!email || !password) {
+      message.textContent = "Email और Password डालें";
+      return;
+    }
+
+    if (password.length < 6) {
+      message.textContent = "Password कम से कम 6 characters का होना चाहिए";
+      return;
+    }
+
+    try {
+      await createUserWithEmailAndPassword(auth, email, password);
+      message.textContent = "Account बन गया! 🎉";
+    } catch (error) {
+      message.textContent = "Account नहीं बना: " + error.message;
+    }
+  });
+
+  logoutBtn.addEventListener("click", async () => {
+    await signOut(auth);
+    message.textContent = "Logout हो गया";
+  });
+
+  onAuthStateChanged(auth, user => {
+    if (user) {
+      title.textContent = "Welcome to IQ Master";
+      loginBtn.style.display = "none";
+      signupBtn.style.display = "none";
+      logoutBtn.style.display = "block";
+      message.textContent = "Logged in: " + user.email;
+    } else {
+      title.textContent = "Login to continue";
+      loginBtn.style.display = "block";
+      signupBtn.style.display = "block";
+      logoutBtn.style.display = "none";
+    }
+  });</script>
 </body>
 </html>
