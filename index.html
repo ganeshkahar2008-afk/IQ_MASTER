@@ -539,7 +539,48 @@ console.log("Service Worker Error:",error);
 }
 
 </script>
-<script type="module">
+<!-- IQ MASTER LOGIN -->
+<div id="loginBox" style="
+  max-width:420px;
+  margin:20px auto;
+  padding:25px;
+  background:white;
+  border-radius:18px;
+  box-shadow:0 8px 25px rgba(0,0,0,.12);
+  text-align:center;
+  font-family:Arial,sans-serif;
+">
+
+  <h2 style="color:#1769d1;margin-top:0;">IQ MASTER</h2>
+  <p id="loginTitle">Login to continue</p>
+
+  <input id="loginEmail"
+    type="email"
+    placeholder="Email"
+    style="width:90%;padding:13px;margin:7px;border:1px solid #ccc;border-radius:10px;">
+
+  <input id="loginPassword"
+    type="password"
+    placeholder="Password"
+    style="width:90%;padding:13px;margin:7px;border:1px solid #ccc;border-radius:10px;">
+
+  <button id="loginBtn"
+    style="width:95%;padding:13px;margin:8px;background:#1769d1;color:white;border:0;border-radius:10px;font-size:16px;">
+    Login
+  </button>
+
+  <button id="signupBtn"
+    style="width:95%;padding:13px;margin:5px;background:#f5c542;color:#061b45;border:0;border-radius:10px;font-size:16px;">
+    Create Account
+  </button>
+
+  <button id="logoutBtn"
+    style="display:none;width:95%;padding:13px;margin:5px;background:#555;color:white;border:0;border-radius:10px;font-size:16px;">
+    Logout
+  </button>
+
+  <p id="loginMessage" style="font-size:14px;"></p>
+</div><script type="module">
   import { initializeApp } 
     from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
 
