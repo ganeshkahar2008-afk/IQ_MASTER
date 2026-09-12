@@ -671,13 +671,17 @@ console.log("Service Worker Error:",error);
   });
 
   onAuthStateChanged(auth, user => {
-    if (user) {
+    if (user) {document.getElementById("home").style.display = "block";
+document.getElementById("loginBox").style.display = "none";
+document.getElementById("startBtn").style.display = "block";
       title.textContent = "Welcome to IQ Master";
       loginBtn.style.display = "none";
       signupBtn.style.display = "none";
       logoutBtn.style.display = "block";
       message.textContent = "Logged in: " + user.email;
-    } else {
+    } else {document.getElementById("home").style.display = "none";
+document.getElementById("loginBox").style.display = "block";
+document.getElementById("startBtn").style.display = "none";
       title.textContent = "Login to continue";
       loginBtn.style.display = "block";
       signupBtn.style.display = "block";
