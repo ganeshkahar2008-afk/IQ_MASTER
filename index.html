@@ -1,201 +1,498 @@
-
+<!DOCTYPE html>
 <html lang="hi">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-
-<title>IQ Master</title>
-
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="theme-color" content="#1769d1">
 <link rel="manifest" href="manifest.json">
 <link rel="icon" href="icon.svg">
-<meta name="theme-color" content="#1769d1">
-<meta name="mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-capable" content="yes">
+<title>IQ Master</title>
 
 <style>
 *{box-sizing:border-box}
 body{
-margin:0;
-font-family:Arial,sans-serif;
-background:#eef3f8;
-color:#172033
+  margin:0;
+  font-family:Arial,sans-serif;
+  background:#061b45;
+  color:#fff;
 }
-.wrap{
-max-width:720px;
-margin:auto;
-padding:16px
+.container{
+  max-width:700px;
+  margin:auto;
+  padding:20px;
 }
 .card{
-background:#fff;
-border-radius:20px;
-padding:22px;
-box-shadow:0 5px 25px #0002
+  background:#fff;
+  color:#111;
+  border-radius:18px;
+  padding:22px;
+  margin-top:20px;
+  box-shadow:0 8px 25px #0005;
 }
-.center{
-text-align:center;
-padding:40px 20px
+h1,h2{text-align:center}
+input{
+  width:100%;
+  padding:13px;
+  margin:7px 0;
+  border:1px solid #bbb;
+  border-radius:10px;
+  font-size:16px;
 }
 button{
-border:0;
-border-radius:12px;
-padding:13px 16px;
-background:#1769d1;
-color:#fff;
-font-size:16px;
-margin:6px 0;
-cursor:pointer
+  border:0;
+  border-radius:10px;
+  padding:12px 16px;
+  font-size:16px;
+  cursor:pointer;
 }
-.full{width:100%}
-.dark{background:#172033}
-.hidden{display:none}
+.primary{
+  width:100%;
+  background:#1769d1;
+  color:#fff;
+  margin-top:10px;
+}
+.secondary{
+  background:#e8eef8;
+  color:#123;
+}
+.hidden{display:none!important}
+.msg{
+  text-align:center;
+  margin-top:10px;
+  font-weight:bold;
+}
 .top{
-display:flex;
-justify-content:space-between;
-font-weight:bold
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+  flex-wrap:wrap;
+}
+.timer{
+  background:#d93025;
+  padding:8px 14px;
+  border-radius:20px;
+  font-weight:bold;
 }
 .opt{
-display:block;
-width:100%;
-text-align:left;
-background:#f0f3f7;
-color:#172033
+  display:block;
+  width:100%;
+  text-align:left;
+  background:#eef3fa;
+  margin:9px 0;
 }
-.sel{
-outline:3px solid #1769d1;
-background:#e4efff
+.opt.sel{
+  background:#1769d1;
+  color:white;
 }
 .nav{
-display:flex;
-gap:8px
-}
-.nav button{
-flex:1
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+  margin-top:15px;
 }
 .dots{
-display:flex;
-flex-wrap:wrap;
-gap:4px;
-margin-top:15px
+  display:grid;
+  grid-template-columns:repeat(10,1fr);
+  gap:5px;
+  margin-top:18px;
 }
 .dot{
-width:31px;
-height:31px;
-padding:0;
-margin:0;
-font-size:12px
+  padding:7px 2px;
+  background:#ddd;
+  font-size:12px;
 }
-.done{background:#b8dfbf}
-.cur{outline:2px solid #1769d1}
+.dot.done{background:#61b36d;color:white}
+.dot.cur{outline:3px solid #1769d1}
 .stat{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:10px
-}
-.stat div{
-background:#f2f5f8;
-padding:15px;
-border-radius:12px;
-text-align:center
-}
-.big{
-font-size:34px;
-font-weight:bold
-}
-.small{
-color:#667085;
-font-size:14px
-}
-@media(max-width:500px){
-.card{padding:16px}
+  background:#f1f5fa;
+  padding:12px;
+  border-radius:10px;
+  margin:8px 0;
 }
 </style>
 </head>
 
 <body>
 
-<div class="wrap">
+<div class="container">
 
-<div id="home" class="card center" style="display:none;">
+<!-- LOGIN -->
+<div id="loginCard" class="card">
+  <h1>🧠 IQ MASTER</h1>
+  <p style="text-align:center">100 Question IQ-Style Reasoning Test</p>
 
-<div style="font-size:58px">🧠</div>
+  <div id="loginArea">
+    <h2>Login</h2>
 
-<h1>IQ Master</h1>
+    <input id="loginEmail" type="email" placeholder="Email Address">
+    <input id="loginPassword" type="password" placeholder="Password">
 
-<p class="small">
-100 प्रश्नों का IQ-style reasoning test
-</p>
+    <button id="loginBtn" class="primary">Login</button>
 
-<p>
-⏱️ 30 मिनट &nbsp; • &nbsp; 📝 100 प्रश्न
-</p>
+    <button id="forgotBtn" class="secondary" style="width:100%;margin-top:8px">
+      Forgot Password?
+    </button>
 
-<button id="startBtn" class="full" onclick="start()" style="display:none;">
-START TEST
-</button>
+    <p id="loginMessage" class="msg"></p>
 
-<p id="best" class="small"></p>
+    <button id="showSignupBtn" class="secondary" style="width:100%;margin-top:12px">
+      Create Account
+    </button>
+  </div>
 
+  <!-- SIGNUP -->
+  <div id="signupArea" class="hidden">
+    <h2>Create Account</h2>
+
+    <input id="signupName" type="text" placeholder="Full Name">
+    <input id="signupEmail" type="email" placeholder="Email Address">
+    <input id="signupPassword" type="password" placeholder="Password">
+    <input id="signupConfirmPassword" type="password" placeholder="Confirm Password">
+
+    <button id="createAccountBtn" class="primary">
+      Create Account
+    </button>
+
+    <p id="signupMessage" class="msg"></p>
+
+    <button id="backLoginBtn" class="secondary" style="width:100%;margin-top:10px">
+      ← Back to Login
+    </button>
+  </div>
 </div>
 
 
+<!-- HOME -->
+<div id="home" class="card hidden">
+  <h1>🧠 IQ MASTER</h1>
+
+  <p style="text-align:center">
+    Welcome, <b id="userName">User</b> 👋
+  </p>
+
+  <p style="text-align:center">
+    100 questions • 30 minutes
+  </p>
+
+  <button id="startBtn" class="primary">
+    🚀 START TEST
+  </button>
+
+  <button id="logoutBtn" class="secondary" style="width:100%;margin-top:10px">
+    Logout
+  </button>
+</div>
+
+
+<!-- QUIZ -->
 <div id="quiz" class="card hidden">
 
-<div class="top">
-<span id="pg"></span>
-<span id="timer">30:00</span>
+  <div class="top">
+    <b id="pg">प्रश्न 1/100</b>
+    <span id="timer" class="timer">30:00</span>
+  </div>
+
+  <h2 id="question"></h2>
+
+  <div id="options"></div>
+
+  <div class="nav">
+    <button id="prevBtn" class="secondary">← Previous</button>
+    <button id="nextBtn" class="primary" style="width:auto">Next →</button>
+  </div>
+
+  <button id="finishBtn" class="secondary" style="width:100%;margin-top:10px">
+    Submit Test
+  </button>
+
+  <div id="dots" class="dots"></div>
 </div>
 
-<h2 id="q"></h2>
 
-<div id="ops"></div>
-
-<div class="nav">
-<button class="dark" onclick="prev()">← पिछला</button>
-<button onclick="next()">अगला →</button>
-</div>
-
-<div id="dots" class="dots"></div>
-
-</div>
-
-
+<!-- RESULT -->
 <div id="result" class="card hidden">
+  <h1>🎉 Test Complete</h1>
 
-<h2>🎉 Test पूरा हुआ</h2>
+  <div class="stat">
+    Score: <b id="score"></b>
+  </div>
 
-<div class="stat">
+  <div class="stat">
+    Percentage: <b id="percent"></b>
+  </div>
 
-<div>
-<div id="score" class="big"></div>
-Score
-</div>
+  <div class="stat">
+    Category: <b id="category"></b>
+  </div>
 
-<div>
-<div id="pct" class="big"></div>
-Percentage
-</div>
+  <h2>Category Performance</h2>
+  <div id="breakdown"></div>
 
-</div>
+  <div class="stat">
+    Best Score: <b id="best"></b>
+  </div>
 
-<h2 id="cat"></h2>
-
-<p id="breakdown"></p>
-
-<p class="small">
-यह IQ-style reasoning test है,
-official/clinical IQ assessment नहीं।
-</p>
-
-<button class="full" onclick="location.reload()">
-🔄 Retest
-</button>
-
+  <button id="homeBtn" class="primary">
+    🏠 Back to Home
+  </button>
 </div>
 
 </div>
 
 
-<script>
+<script type="module">
+
+/* ================= FIREBASE ================= */
+
+import {initializeApp}
+from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
+
+import {
+  getAuth,
+  onAuthStateChanged,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  signOut,
+  updateProfile,
+  sendPasswordResetEmail
+}
+from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
+
+const firebaseConfig={
+  apiKey:"AIzaSyCSNjBkHBBWz0_F3u0yES65DZlZHAhcswg",
+  authDomain:"iq-master-f5897.firebaseapp.com",
+  projectId:"iq-master-f5897",
+  storageBucket:"iq-master-f5897.firebasestorage.app",
+  messagingSenderId:"406382595192",
+  appId:"1:406382595192:web:26449cbb2802b9497bb18d",
+  measurementId:"G-SGW9XJCFZ3"
+};
+
+const app=initializeApp(firebaseConfig);
+const auth=getAuth(app);
+
+
+/* ================= HELPERS ================= */
+
+const $=id=>document.getElementById(id);
+
+function message(id,text,good=false){
+  const el=$(id);
+  el.textContent=text;
+  el.style.color=good?"green":"#d93025";
+}
+
+function friendlyError(e){
+
+  const codes={
+    "auth/email-already-in-use":
+      "यह Email पहले से registered है। अगर आपने पहले account बनाया था तो Login करें या Forgot Password इस्तेमाल करें।",
+
+    "auth/invalid-email":
+      "Email address सही नहीं है।",
+
+    "auth/weak-password":
+      "Password कम से कम 6 characters का होना चाहिए।",
+
+    "auth/invalid-credential":
+      "Email या Password गलत है।",
+
+    "auth/user-not-found":
+      "यह account नहीं मिला।",
+
+    "auth/wrong-password":
+      "Password गलत है।",
+
+    "auth/too-many-requests":
+      "बहुत ज्यादा कोशिशें हुई हैं। थोड़ी देर बाद फिर try करें।",
+
+    "auth/network-request-failed":
+      "Internet connection check करें।"
+  };
+
+  return codes[e.code] || "कुछ समस्या हुई। फिर से try करें।";
+}
+
+
+/* ================= AUTH UI ================= */
+
+$("showSignupBtn").onclick=()=>{
+  $("loginArea").classList.add("hidden");
+  $("signupArea").classList.remove("hidden");
+};
+
+$("backLoginBtn").onclick=()=>{
+  $("signupArea").classList.add("hidden");
+  $("loginArea").classList.remove("hidden");
+};
+
+
+/* ================= CREATE ACCOUNT ================= */
+
+$("createAccountBtn").onclick=async()=>{
+
+  const name=$("signupName").value.trim();
+  const email=$("signupEmail").value.trim();
+  const password=$("signupPassword").value;
+  const confirm=$("signupConfirmPassword").value;
+
+  if(!name || !email || !password || !confirm){
+    message("signupMessage","सभी details भरें");
+    return;
+  }
+
+  if(password.length<6){
+    message(
+      "signupMessage",
+      "Password कम से कम 6 characters का होना चाहिए"
+    );
+    return;
+  }
+
+  if(password!==confirm){
+    message(
+      "signupMessage",
+      "Password और Confirm Password समान नहीं हैं"
+    );
+    return;
+  }
+
+  try{
+
+    const result=
+      await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+
+    await updateProfile(result.user,{
+      displayName:name
+    });
+
+    message(
+      "signupMessage",
+      "Account बन गया! 🎉",
+      true
+    );
+
+  }catch(e){
+
+    message(
+      "signupMessage",
+      friendlyError(e)
+    );
+
+  }
+
+};
+
+
+/* ================= LOGIN ================= */
+
+$("loginBtn").onclick=async()=>{
+
+  const email=$("loginEmail").value.trim();
+  const password=$("loginPassword").value;
+
+  if(!email || !password){
+    message("loginMessage","Email और Password भरें");
+    return;
+  }
+
+  try{
+
+    await signInWithEmailAndPassword(
+      auth,
+      email,
+      password
+    );
+
+  }catch(e){
+
+    message(
+      "loginMessage",
+      friendlyError(e)
+    );
+
+  }
+
+};
+
+
+/* ================= FORGOT PASSWORD ================= */
+
+$("forgotBtn").onclick=async()=>{
+
+  const email=$("loginEmail").value.trim();
+
+  if(!email){
+    message(
+      "loginMessage",
+      "पहले अपना Email डालें"
+    );
+    return;
+  }
+
+  try{
+
+    await sendPasswordResetEmail(
+      auth,
+      email
+    );
+
+    message(
+      "loginMessage",
+      "Password reset email भेज दिया गया है 📧",
+      true
+    );
+
+  }catch(e){
+
+    message(
+      "loginMessage",
+      friendlyError(e)
+    );
+
+  }
+
+};
+
+
+/* ================= LOGOUT ================= */
+
+$("logoutBtn").onclick=async()=>{
+  await signOut(auth);
+};
+
+
+/* ================= AUTH STATE ================= */
+
+onAuthStateChanged(auth,user=>{
+
+  if(user){
+
+    $("loginCard").classList.add("hidden");
+    $("home").classList.remove("hidden");
+
+    $("userName").textContent=
+      user.displayName ||
+      user.email.split("@")[0];
+
+  }else{
+
+    $("loginCard").classList.remove("hidden");
+    $("home").classList.add("hidden");
+    $("quiz").classList.add("hidden");
+    $("result").classList.add("hidden");
+
+  }
+
+});
+
+
+/* ================= QUESTIONS ================= */
 
 const raw=[
 
@@ -209,7 +506,6 @@ const raw=[
 ["64,32,16,8,?",["2","4","6","12"],1,"Number Series"],
 ["11,22,44,88,?",["132","154","176","180"],2,"Number Series"],
 ["121,144,169,196,?",["216","225","236","256"],1,"Number Series"],
-
 ["2,3,5,8,12,17,?",["21","22","23","24"],2,"Number Series"],
 ["12,15,21,30,42,?",["54","55","57","60"],2,"Number Series"],
 ["50,45,35,20,?",["10","5","0","-5"],2,"Number Series"],
@@ -260,425 +556,261 @@ const raw=[
 ];
 
 
+/* ================= MAKE 100 QUESTIONS ================= */
+
 while(raw.length<100){
 
-let k=raw.length+1;
-let n=k%10+2;
-let type=["Number Series","Logic","Pattern","Math","Classification"][k%5];
-let q,a;
+  const k=raw.length+1;
+  const n=k%10+2;
 
-if(type==="Number Series"){
+  const type=[
+    "Number Series",
+    "Logic",
+    "Pattern",
+    "Math",
+    "Classification"
+  ][k%5];
 
-q=`${n}, ${n+2}, ${n+4}, ${n+6}, ?`;
-
-a=[
-String(n+6),
-String(n+8),
-String(n+10),
-String(n+12)
-];
-
-raw.push([q,a,1,type]);
-
-}
-
-else if(type==="Math"){
-
-q=`${k} का ${k} से गुणनफल क्या है?`;
-
-a=[
-String(k+k),
-String(k*k),
-String(k*3),
-String(k+10)
-];
-
-raw.push([q,a,1,type]);
-
-}
-
-else if(type==="Pattern"){
-
-q=`यदि नियम में हर संख्या को 3 से गुणा किया जाए, तो ${n} = ?`;
-
-a=[
-String(n+2),
-String(n*3),
-String(n*2),
-String(n+3)
-];
-
-raw.push([q,a,1,type]);
-
-}
-
-else if(type==="Classification"){
-
-q="अलग कौन है?";
-
-a=[
-"सेब",
-"आम",
-"गाजर",
-"केला"
-];
-
-raw.push([q,a,2,type]);
-
-}
-
-else{
-
-q=`यदि A, B से लंबा है और B, C से लंबा है, तो सबसे छोटा कौन?`;
-
-a=[
-"A",
-"B",
-"C",
-"निश्चित नहीं"
-];
-
-raw.push([q,a,2,type]);
-
-}
+  raw.push([
+    `प्रश्न ${k}: ${n}, ${n+2}, ${n+4}, ?`,
+    [
+      String(n+5),
+      String(n+6),
+      String(n+7),
+      String(n+8)
+    ],
+    1,
+    type
+  ]);
 
 }
 
 
-let i=0;
-let ans=Array(100).fill(-1);
-let sec=1800;
-let t;
+/* ================= QUIZ ================= */
+
+let index=0;
+let answers=Array(100).fill(-1);
+let seconds=1800;
+let timerInterval=null;
 
 
-const $=x=>document.getElementById(x);
+function showQuestion(){
 
+  $("pg").textContent=
+    `प्रश्न ${index+1}/100`;
 
-function start(){
+  $("question").textContent=
+    raw[index][0];
 
-$("home").classList.add("hidden");
+  $("options").innerHTML=
+    raw[index][1].map((x,k)=>`
+      <button
+        class="opt ${answers[index]===k?"sel":""}"
+        onclick="pick(${k})">
+        ${String.fromCharCode(65+k)}. ${x}
+      </button>
+    `).join("");
 
-$("quiz").classList.remove("hidden");
+  $("dots").innerHTML=
+    raw.map((_,k)=>`
+      <button
+        class="dot
+        ${answers[k]>=0?"done":""}
+        ${k===index?"cur":""}"
+        onclick="jump(${k})">
+        ${k+1}
+      </button>
+    `).join("");
 
-show();
-
-t=setInterval(()=>{
-
-sec--;
-
-$("timer").textContent=
-String(Math.floor(sec/60)).padStart(2,"0")
-+
-":"
-+
-String(sec%60).padStart(2,"0");
-
-if(sec<=0)finish();
-
-},1000);
-
-}
-
-
-function show(){
-
-$("pg").textContent=`प्रश्न ${i+1}/100`;
-
-$("q").textContent=raw[i][0];
-
-$("ops").innerHTML=
-raw[i][1].map((x,k)=>
-`<button class="opt ${ans[i]===k?"sel":""}" onclick="pick(${k})">
-${String.fromCharCode(65+k)}. ${x}
-</button>`
-).join("");
-
-$("dots").innerHTML=
-raw.map((_,k)=>
-`<button class="dot ${ans[k]>=0?"done":""} ${k===i?"cur":""}" onclick="jump(${k})">
-${k+1}
-</button>`
-).join("");
+  $("prevBtn").disabled=index===0;
+  $("nextBtn").disabled=index===99;
 
 }
 
 
-function pick(k){
+window.pick=k=>{
 
-ans[i]=k;
+  answers[index]=k;
+  showQuestion();
 
-show();
-
-}
-
-
-function jump(k){
-
-i=k;
-
-show();
-
-}
+};
 
 
-function prev(){
+window.jump=k=>{
 
-if(i){
+  index=k;
+  showQuestion();
 
-i--;
-
-show();
-
-}
-
-}
+};
 
 
-function next(){
+$("prevBtn").onclick=()=>{
 
-if(i<99){
+  if(index>0){
+    index--;
+    showQuestion();
+  }
 
-i++;
+};
 
-show();
 
-}
+$("nextBtn").onclick=()=>{
 
-else{
+  if(index<99){
+    index++;
+    showQuestion();
+  }
 
-finish();
+};
 
-}
 
-}
+/* ================= START ================= */
+
+$("startBtn").onclick=()=>{
+
+  $("home").classList.add("hidden");
+  $("quiz").classList.remove("hidden");
+
+  index=0;
+  answers=Array(100).fill(-1);
+  seconds=1800;
+
+  $("timer").textContent="30:00";
+
+  showQuestion();
+
+  clearInterval(timerInterval);
+
+  timerInterval=setInterval(()=>{
+
+    seconds--;
+
+    const min=
+      String(Math.floor(seconds/60)).padStart(2,"0");
+
+    const sec=
+      String(seconds%60).padStart(2,"0");
+
+    $("timer").textContent=
+      `${min}:${sec}`;
+
+    if(seconds<=0){
+      clearInterval(timerInterval);
+      finish();
+    }
+
+  },1000);
+
+};
+
+
+/* ================= FINISH ================= */
+
+$("finishBtn").onclick=()=>{
+
+  if(confirm("क्या आप test submit करना चाहते हैं?")){
+    finish();
+  }
+
+};
 
 
 function finish(){
 
-clearInterval(t);
+  clearInterval(timerInterval);
 
-let s=ans.reduce(
-(z,x,j)=>z+(x===raw[j][2]),
-0
-);
+  let score=0;
+  const categories={};
 
-let cats={};
+  raw.forEach((q,i)=>{
 
-raw.forEach((x,j)=>{
+    const cat=q[3];
 
-cats[x[3]]??={c:0,t:0};
+    if(!categories[cat]){
+      categories[cat]={
+        correct:0,
+        total:0
+      };
+    }
 
-cats[x[3]].t++;
+    categories[cat].total++;
 
-if(ans[j]===x[2]){
+    if(answers[i]===q[2]){
+      score++;
+      categories[cat].correct++;
+    }
 
-cats[x[3]].c++;
+  });
 
-}
+  const percent=
+    ((score/100)*100).toFixed(0);
 
-});
+  let category;
 
-
-localStorage.iqBest=
-Math.max(
-s,
-+(localStorage.iqBest||0)
-);
-
-
-$("quiz").classList.add("hidden");
-
-$("result").classList.remove("hidden");
-
-$("score").textContent=s+"/100";
-
-$("pct").textContent=s+"%";
-
-$("cat").textContent=
-s>=90
-?"🌟 बहुत उत्कृष्ट"
-:s>=75
-?"👏 बहुत अच्छा"
-:s>=60
-?"👍 अच्छा"
-:s>=40
-?"🙂 औसत"
-:"📚 अधिक अभ्यास की जरूरत";
+  if(score>=90)
+    category="Excellent 🏆";
+  else if(score>=75)
+    category="Very Good 🌟";
+  else if(score>=60)
+    category="Good 👍";
+  else if(score>=40)
+    category="Average 🙂";
+  else
+    category="Keep Practicing 📚";
 
 
-$("breakdown").innerHTML=
-Object.entries(cats)
-.map(([k,v])=>`${k}: ${v.c}/${v.t}`)
-.join("<br>");
+  $("score").textContent=
+    `${score}/100`;
 
-}
+  $("percent").textContent=
+    `${percent}%`;
 
-
-$("best").textContent=
-"🏆 Best Score: "
-+
-(localStorage.iqBest||0)
-+
-"/100";
-
-</script>
+  $("category").textContent=
+    category;
 
 
-<script>
+  $("breakdown").innerHTML=
+    Object.entries(categories)
+    .map(([cat,v])=>`
+      <div class="stat">
+        <b>${cat}</b> :
+        ${v.correct}/${v.total}
+      </div>
+    `).join("");
 
-if("serviceWorker" in navigator){
 
-navigator.serviceWorker.register("./sw.js")
-.then(()=>{
-console.log("Service Worker Registered");
-})
-.catch(error=>{
-console.log("Service Worker Error:",error);
-});
+  const oldBest=
+    Number(localStorage.getItem("iqBest")||0);
 
-}
+  if(score>oldBest){
 
-</script>
-<!-- IQ MASTER LOGIN -->
-<div id="loginBox" style="
-  max-width:420px;
-  margin:20px auto;
-  padding:25px;
-  background:white;
-  border-radius:18px;
-  box-shadow:0 8px 25px rgba(0,0,0,.12);
-  text-align:center;
-  font-family:Arial,sans-serif;
-">
-
-  <h2 style="color:#1769d1;margin-top:0;">IQ MASTER</h2>
-  <p id="loginTitle">Login to continue</p>
-
-  <input id="loginEmail"
-    type="email"
-    placeholder="Email"
-    style="width:90%;padding:13px;margin:7px;border:1px solid #ccc;border-radius:10px;">
-
-  <input id="loginPassword"
-    type="password"
-    placeholder="Password"
-    style="width:90%;padding:13px;margin:7px;border:1px solid #ccc;border-radius:10px;">
-
-  <button id="loginBtn"
-    style="width:95%;padding:13px;margin:8px;background:#1769d1;color:white;border:0;border-radius:10px;font-size:16px;">
-    Login
-  </button>
-
-  <button id="signupBtn"
-    style="width:95%;padding:13px;margin:5px;background:#f5c542;color:#061b45;border:0;border-radius:10px;font-size:16px;">
-   <div id="signupForm" style="display:none;">
-
-  <input id="signupName"
-    type="text"
-    placeholder="Full Name"
-    style="width:90%;padding:13px;margin:7px;border:1px solid #ccc;border-radius:10px;">
-
-  <input id="signupEmail"
-    type="email"
-    placeholder="Email Address"
-    style="width:90%;padding:13px;margin:7px;border:1px solid #ccc;border-radius:10px;">
-
-  <input id="signupPassword"
-    type="password"
-    placeholder="Password"
-    style="width:90%;padding:13px;margin:7px;border:1px solid #ccc;border-radius:10px;">
-
-  <input id="signupConfirmPassword"
-    type="password"
-    placeholder="Confirm Password"
-    style="width:90%;padding:13px;margin:7px;border:1px solid #ccc;border-radius:10px;">
-
-  <button id="createAccountBtn"
-    type="button"
-    style="width:95%;padding:13px;margin:8px;background:#f5c542;color:#061b45;border:0;border-radius:10px;font-size:16px;">
-    Create Account
-  </button>
-
-   </div> Create Account
-  </button>
-
-  <button id="logoutBtn"
-    style="display:none;width:95%;padding:13px;margin:5px;background:#555;color:white;border:0;border-radius:10px;font-size:16px;">
-    Logout
-  </button>
-
-  <p id="loginMessage" style="font-size:14px;"></p>
-</div><script type="module">
-  import { initializeApp } 
-    from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
-
-  import {
-    getAuth,
-    onAuthStateChanged,
-    createUserWithEmailAndPassword,
-    signInWithEmailAndPassword,
-    signOut
-  } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
-
-  const firebaseConfig = {
-    apiKey: "AIzaSyCSNjBkHBBWz0_F3u0yES65DZlZHAhcswg",
-    authDomain: "iq-master-f5897.firebaseapp.com",
-    projectId: "iq-master-f5897",
-    storageBucket: "iq-master-f5897.firebasestorage.app",
-    messagingSenderId: "406382595192",
-    appId: "1:406382595192:web:26449cbb2802b9497bb18d",
-    measurementId: "G-SGW9XJCFZ3"
-  };
-
-  const app = initializeApp(firebaseConfig);
-  const auth = getAuth(app);
-
-  window.iqFirebase = {
-    auth,
-    createUserWithEmailAndPassword,
-    signInWithEmailAndPassword,
-    signOut
-  };
-
-  onAuthStateChanged(auth, user => {
-    window.currentIQUser = user || null;
-    console.log(
-      user ? "IQ Master: Logged in" : "IQ Master: Not logged in"
+    localStorage.setItem(
+      "iqBest",
+      score
     );
-  });
-  const emailInput = document.getElementById("loginEmail");
-  const passwordInput = document.getElementById("loginPassword");
-  const loginBtn = document.getElementById("loginBtn");
-  const signupBtn = document.getElementById("signupBtn");
-  const logoutBtn = document.getElementById("logoutBtn");
-  const message = document.getElementById("loginMessage");
-  const title = document.getElementById("loginTitle");
 
-  loginBtn.addEventListener("click", async () => {
-    const email = emailInput.value.trim();
-    const password = passwordInput.value;
+  }
 
-    if (!email || !password) {
-      message.textContent = "Email और Password डालें";
-      return;
-    }
+  $("best").textContent=
+    `${Math.max(score,oldBest)}/100`;
 
-    try {
-      await signInWithEmailAndPassword(auth, email, password);
-      message.textContent = "Login सफल! ✅";
-    } catch (error) {
-      message.textContent = "Login failed: " + error.message;
-    }
-  });
+  $("quiz").classList.add("hidden");
+  $("result").classList.remove("hidden");
 
-  signupBtn.addEventListener("click", async () => {
-    const email = emailInput.value.trim();
-    const password = passwordInput.value;
+}
 
-    if (!email || !password) {
-      message.textContent = "Email और Password डालें";
-      return;
-    }
 
-    if (password.length < 6) {
-      message.textContent = "Password कम से 
+/* ================= HOME BUTTON ================= */
+
+$("homeBtn").onclick=()=>{
+
+  $("result").classList.add("hidden");
+  $("home").classList.remove("hidden");
+
+};
+
+
+</script>
+
+</body>
+</html>
