@@ -539,6 +539,44 @@ console.log("Service Worker Error:",error);
 }
 
 </script>
+<script type="module">
+  import { initializeApp } 
+    from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
 
+  import {
+    getAuth,
+    onAuthStateChanged,
+    createUserWithEmailAndPassword,
+    signInWithEmailAndPassword,
+    signOut
+  } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyCSNjBkHBBWz0_F3u0yES65DZlZHAhcswg",
+    authDomain: "iq-master-f5897.firebaseapp.com",
+    projectId: "iq-master-f5897",
+    storageBucket: "iq-master-f5897.firebasestorage.app",
+    messagingSenderId: "406382595192",
+    appId: "1:406382595192:web:26449cbb2802b9497bb18d",
+    measurementId: "G-SGW9XJCFZ3"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+
+  window.iqFirebase = {
+    auth,
+    createUserWithEmailAndPassword,
+    signInWithEmailAndPassword,
+    signOut
+  };
+
+  onAuthStateChanged(auth, user => {
+    window.currentIQUser = user || null;
+    console.log(
+      user ? "IQ Master: Logged in" : "IQ Master: Not logged in"
+    );
+  });
+</script>
 </body>
 </html>
