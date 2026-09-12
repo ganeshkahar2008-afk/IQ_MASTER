@@ -571,7 +571,35 @@ console.log("Service Worker Error:",error);
 
   <button id="signupBtn"
     style="width:95%;padding:13px;margin:5px;background:#f5c542;color:#061b45;border:0;border-radius:10px;font-size:16px;">
+   <div id="signupForm" style="display:none;">
+
+  <input id="signupName"
+    type="text"
+    placeholder="Full Name"
+    style="width:90%;padding:13px;margin:7px;border:1px solid #ccc;border-radius:10px;">
+
+  <input id="signupEmail"
+    type="email"
+    placeholder="Email Address"
+    style="width:90%;padding:13px;margin:7px;border:1px solid #ccc;border-radius:10px;">
+
+  <input id="signupPassword"
+    type="password"
+    placeholder="Password"
+    style="width:90%;padding:13px;margin:7px;border:1px solid #ccc;border-radius:10px;">
+
+  <input id="signupConfirmPassword"
+    type="password"
+    placeholder="Confirm Password"
+    style="width:90%;padding:13px;margin:7px;border:1px solid #ccc;border-radius:10px;">
+
+  <button id="createAccountBtn"
+    type="button"
+    style="width:95%;padding:13px;margin:8px;background:#f5c542;color:#061b45;border:0;border-radius:10px;font-size:16px;">
     Create Account
+  </button>
+
+   </div> Create Account
   </button>
 
   <button id="logoutBtn"
