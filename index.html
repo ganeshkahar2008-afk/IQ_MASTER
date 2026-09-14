@@ -1,14 +1,2031 @@
-<!doctype html><html lang="hi"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"><meta name="theme-color" content="#061b45"><link rel="manifest" href="manifest.json"><link rel="icon" href="icon.svg"><title>IQ MASTER - Brain Blocks</title><style>*{box-sizing:border-box}body{margin:0;background:#061b45;color:#fff;font-family:Arial,sans-serif}.wrap{max-width:520px;margin:auto;padding:14px}.card{background:#0d2a5c;border:1px solid #294d83;border-radius:18px;padding:16px;box-shadow:0 8px 28px #0006}h1,h2{text-align:center}input{width:100%;padding:13px;margin:6px 0;border:0;border-radius:10px;font-size:16px}button{border:0;border-radius:10px;padding:11px 14px;font-size:15px}.primary{background:#1769d1;color:#fff;width:100%;margin-top:8px}.secondary{background:#dfe9f8;color:#09224b}.hidden{display:none!important}.msg{text-align:center;min-height:20px}.userbar,.scorebar{display:flex;justify-content:space-between;align-items:center;gap:8px}.scorebar{margin:12px 0}.badge{background:#102f63;padding:8px 10px;border-radius:12px}#board{width:min(92vw,420px);aspect-ratio:1;margin:12px auto;display:grid;grid-template-columns:repeat(8,1fr);gap:4px;touch-action:none}.cell{background:#102a52;border:1px solid #183c70;border-radius:5px}.cell.filled{box-shadow:0 0 9px currentColor}.pieces{display:flex;justify-content:space-around;gap:8px}.piece{width:31%;min-height:92px;background:#09224b;border:1px solid #294d83;border-radius:14px;display:flex;align-items:center;justify-content:center;touch-action:none}.mini{display:grid;gap:3px}.mc{width:22px;height:22px;border-radius:4px;box-shadow:0 0 7px currentColor}.info{text-align:center;color:#cbd9ef;font-size:13px}.actions{display:flex;gap:8px;margin-top:10px}.actions button{flex:1}.overlay{position:fixed;inset:0;background:#020b1dcc;display:flex;align-items:center;justify-content:center;padding:20px;z-index:5}.modal{width:min(400px,100%);background:#0d2a5c;border:1px solid #3b649b;border-radius:18px;padding:22px;text-align:center}</style></head><body><div class="wrap">
-<div id="auth" class="card"><h1>🧠 IQ MASTER</h1><p class="info">Brain Blocks — Drag, Place & Clear!</p><div id="login"><h2>Login</h2><input id="le" type="email" placeholder="Email Address"><input id="lp" type="password" placeholder="Password"><button id="lb" class="primary">Login</button><button id="fp" class="secondary" style="width:100%;margin-top:8px">Forgot Password?</button><p id="lm" class="msg"></p><button id="tos" class="secondary" style="width:100%">Create Account</button></div><div id="signup" class="hidden"><h2>Create Account</h2><input id="sn" placeholder="Full Name"><input id="se" type="email" placeholder="Email Address"><input id="sp" type="password" placeholder="Password"><input id="sc" type="password" placeholder="Confirm Password"><button id="ca" class="primary">Create Account</button><p id="sm" class="msg"></p><button id="tolog" class="secondary" style="width:100%">← Back to Login</button></div></div>
-<div id="home" class="card hidden"><h1>🧩 Brain Blocks</h1><p class="info">Welcome, <b id="uname">Player</b> 👋</p><button id="play" class="primary">🎮 PLAY GAME</button><div class="actions"><button id="logout" class="secondary">Logout</button></div><p class="info">Best Score: <b id="hb">0</b></p></div>
-<div id="game" class="card hidden"><div class="userbar"><b>🧩 Brain Blocks</b><button id="gh" class="secondary">Home</button></div><div class="scorebar"><span class="badge">Score: <b id="score">0</b></span><span class="badge">Combo: <b id="combo">0</b>🔥</span><span class="badge">Best: <b id="best">0</b></span></div><div id="board"></div><p id="gm" class="info">नीचे से shape चुनकर board पर रखें।</p><div id="pieces" class="pieces"></div><div class="actions"><button id="new" class="secondary">🔄 New Game</button></div></div></div>
-<div id="over" class="overlay hidden"><div class="modal"><h1>💥 Game Over</h1><h2>Score: <span id="fs">0</span></h2><p>Best Score: <b id="fb">0</b></p><button id="again" class="primary">🎮 Play Again</button><button id="oh" class="secondary" style="width:100%;margin-top:8px">🏠 Home</button></div></div>
+<!doctype html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<meta name="theme-color" content="#061b45">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icon.svg">
+<title>IQ MASTER - Brain Blocks</title>
+
+<style>
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  background:#061b45;
+  color:#fff;
+  font-family:Arial,sans-serif;
+  -webkit-tap-highlight-color:transparent;
+}
+
+.wrap{
+  max-width:520px;
+  margin:auto;
+  padding:14px;
+}
+
+.card{
+  background:#0d2a5c;
+  border:1px solid #294d83;
+  border-radius:18px;
+  padding:16px;
+  box-shadow:0 8px 28px #0006;
+}
+
+h1,h2{text-align:center}
+
+input{
+  width:100%;
+  padding:13px;
+  margin:6px 0;
+  border:0;
+  border-radius:10px;
+  font-size:16px;
+}
+
+button{
+  border:0;
+  border-radius:10px;
+  padding:11px 14px;
+  font-size:15px;
+  cursor:pointer;
+  touch-action:manipulation;
+}
+
+.primary{
+  background:#1769d1;
+  color:#fff;
+  width:100%;
+  margin-top:8px;
+}
+
+.secondary{
+  background:#dfe9f8;
+  color:#09224b;
+}
+
+.hidden{display:none!important}
+
+.msg{
+  text-align:center;
+  min-height:20px;
+}
+
+.info{
+  text-align:center;
+  color:#cbd9ef;
+  font-size:13px;
+}
+
+.userbar,
+.scorebar{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:8px;
+}
+
+.scorebar{
+  margin:12px 0;
+  flex-wrap:wrap;
+}
+
+.badge{
+  background:#102f63;
+  padding:8px 10px;
+  border-radius:12px;
+}
+
+.levelBox{
+  background:#09224b;
+  border:1px solid #294d83;
+  border-radius:12px;
+  padding:10px;
+  margin:10px 0;
+}
+
+.levelTop{
+  display:flex;
+  justify-content:space-between;
+  font-weight:bold;
+}
+
+.xpBar{
+  height:8px;
+  background:#061b45;
+  border-radius:10px;
+  overflow:hidden;
+  margin-top:7px;
+}
+
+.xpFill{
+  height:100%;
+  width:0%;
+  background:#31d244;
+  transition:width .25s ease;
+}
+
+#board{
+  width:min(92vw,420px);
+  aspect-ratio:1;
+  margin:12px auto;
+  display:grid;
+  grid-template-columns:repeat(8,1fr);
+  gap:4px;
+  touch-action:none;
+  user-select:none;
+}
+
+.cell{
+  background:#102a52;
+  border:1px solid #183c70;
+  border-radius:5px;
+  transition:background .08s,box-shadow .08s,opacity .08s;
+}
+
+.cell.filled{
+  box-shadow:0 0 9px currentColor;
+}
+
+.cell.preview{
+  opacity:.5;
+  box-shadow:0 0 12px currentColor;
+}
+
+.pieces{
+  display:flex;
+  justify-content:space-around;
+  gap:8px;
+}
+
+.piece{
+  width:31%;
+  min-height:92px;
+  background:#09224b;
+  border:1px solid #294d83;
+  border-radius:14px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  touch-action:none;
+  user-select:none;
+  transition:transform .08s;
+}
+
+.piece:active{
+  transform:scale(.96);
+}
+
+.mini{
+  display:grid;
+  gap:3px;
+}
+
+.mc{
+  width:22px;
+  height:22px;
+  border-radius:4px;
+  box-shadow:0 0 7px currentColor;
+}
+
+.actions{
+  display:flex;
+  gap:8px;
+  margin-top:10px;
+}
+
+.actions button{
+  flex:1;
+}
+
+.soundBtn{
+  font-size:18px;
+  padding:8px 10px;
+}
+
+.overlay{
+  position:fixed;
+  inset:0;
+  background:#020b1dcc;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+  z-index:5;
+}
+
+.modal{
+  width:min(400px,100%);
+  background:#0d2a5c;
+  border:1px solid #3b649b;
+  border-radius:18px;
+  padding:22px;
+  text-align:center;
+}
+
+.popText{
+  position:fixed;
+  left:50%;
+  top:42%;
+  transform:translate(-50%,-50%) scale(.7);
+  font-size:30px;
+  font-weight:bold;
+  pointer-events:none;
+  opacity:0;
+  z-index:20;
+  text-shadow:0 0 15px currentColor;
+}
+
+.popText.show{
+  animation:popText .7s ease-out;
+}
+
+@keyframes popText{
+  0%{opacity:0;transform:translate(-50%,-50%) scale(.6)}
+  20%{opacity:1;transform:translate(-50%,-50%) scale(1.15)}
+  70%{opacity:1;transform:translate(-50%,-65%) scale(1)}
+  100%{opacity:0;transform:translate(-50%,-85%) scale(.9)}
+}
+</style>
+</head>
+
+<body>
+
+<div class="wrap">
+
+<!-- AUTH -->
+<div id="auth" class="card">
+  <h1>🧠 IQ MASTER</h1>
+  <p class="info">Brain Blocks — Drag, Place & Clear!</p>
+
+  <div id="login">
+    <h2>Login</h2>
+
+    <input id="le" type="email" placeholder="Email Address">
+    <input id="lp" type="password" placeholder="Password">
+
+    <button id="lb" class="primary">Login</button>
+    <button id="fp" class="secondary" style="width:100%;margin-top:8px">
+      Forgot Password?
+    </button>
+
+    <p id="lm" class="msg"></p>
+
+    <button id="tos" class="secondary" style="width:100%">
+      Create Account
+    </button>
+  </div>
+
+  <div id="signup" class="hidden">
+    <h2>Create Account</h2>
+
+    <input id="sn" placeholder="Full Name">
+    <input id="se" type="email" placeholder="Email Address">
+    <input id="sp" type="password" placeholder="Password">
+    <input id="sc" type="password" placeholder="Confirm Password">
+
+    <button id="ca" class="primary">Create Account</button>
+
+    <p id="sm" class="msg"></p>
+
+    <button id="tolog" class="secondary" style="width:100%">
+      ← Back to Login
+    </button>
+  </div>
+</div>
+
+
+<!-- HOME -->
+<div id="home" class="card hidden">
+  <h1>🧩 Brain Blocks</h1>
+
+  <p class="info">
+    Welcome, <b id="uname">Player</b> 👋
+  </p>
+
+  <div class="levelBox">
+    <div class="levelTop">
+      <span>🏆 Level <b id="homeLevel">1</b></span>
+      <span id="homeXP">0 / 100 XP</span>
+    </div>
+
+    <div class="xpBar">
+      <div id="homeXPFill" class="xpFill"></div>
+    </div>
+  </div>
+
+  <button id="play" class="primary">
+    🎮 PLAY GAME
+  </button>
+
+  <div class="actions">
+    <button id="logout" class="secondary">Logout</button>
+    <button id="homeSound" class="secondary soundBtn">🔊</button>
+  </div>
+
+  <p class="info">
+    Best Score: <b id="hb">0</b>
+  </p>
+</div>
+
+
+<!-- GAME -->
+<div id="game" class="card hidden">
+
+  <div class="userbar">
+    <b>🧩 Brain Blocks</b>
+
+    <div>
+      <button id="sound" class="secondary soundBtn">🔊</button>
+      <button id="gh" class="secondary">Home</button>
+    </div>
+  </div>
+
+  <div class="scorebar">
+    <span class="badge">
+      Score: <b id="score">0</b>
+    </span>
+
+    <span class="badge">
+      Combo: <b id="combo">0</b>🔥
+    </span>
+
+    <span class="badge">
+      Best: <b id="best">0</b>
+    </span>
+  </div>
+
+  <div class="levelBox">
+    <div class="levelTop">
+      <span>⭐ Level <b id="level">1</b></span>
+      <span id="xpText">0 / 100 XP</span>
+    </div>
+
+    <div class="xpBar">
+      <div id="xpFill" class="xpFill"></div>
+    </div>
+  </div>
+
+  <div id="board"></div>
+
+  <p id="gm" class="info">
+    नीचे से shape चुनकर board पर रखें।
+  </p>
+
+  <div id="pieces" class="pieces"></div>
+
+  <div class="actions">
+    <button id="new" class="secondary">
+      🔄 New Game
+    </button>
+  </div>
+
+</div>
+
+</div>
+
+
+<!-- GAME OVER -->
+<div id="over" class="overlay hidden">
+  <div class="modal">
+
+    <h1>💥 Game Over</h1>
+
+    <h2>
+      Score: <span id="fs">0</span>
+    </h2>
+
+    <p>
+      Best Score: <b id="fb">0</b>
+    </p>
+
+    <p>
+      Level: <b id="fl">1</b>
+    </p>
+
+    <button id="again" class="primary">
+      🎮 Play Again
+    </button>
+
+    <button id="oh" class="secondary"
+      style="width:100%;margin-top:8px">
+      🏠 Home
+    </button>
+
+  </div>
+</div>
+
+<div id="popText" class="popText"></div>
+
+
 <script type="module">
-import{initializeApp}from'https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js';import{getAuth,onAuthStateChanged,createUserWithEmailAndPassword,signInWithEmailAndPassword,signOut,updateProfile,sendPasswordResetEmail}from'https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js';
-const app=initializeApp({apiKey:'AIzaSyCSNjBkHBBWz0_F3u0yES65DZlZHAhcswg',authDomain:'iq-master-f5897.firebaseapp.com',projectId:'iq-master-f5897',storageBucket:'iq-master-f5897.firebasestorage.app',messagingSenderId:'406382595192',appId:'1:406382595192:web:26449cbb2802b9497bb18d',measurementId:'G-SGW9XJCFZ3'}),auth=getAuth(app),$=x=>document.getElementById(x);const say=(id,t,ok=false)=>{$(id).textContent=t;$(id).style.color=ok?'#6ee7a0':'#ff8d8d'};const err=e=>({"auth/email-already-in-use":"यह Email पहले से registered है। Login या Forgot Password करें।","auth/invalid-email":"Email सही नहीं है।","auth/weak-password":"Password कम से कम 6 characters का होना चाहिए।","auth/invalid-credential":"Email या Password गलत है।","auth/user-not-found":"Account नहीं मिला।","auth/too-many-requests":"बहुत ज्यादा कोशिशें हुई हैं। थोड़ी देर बाद फिर try करें।"}[e.code]||'कुछ समस्या हुई।');
-$('tos').onclick=()=>{$('login').classList.add('hidden');$('signup').classList.remove('hidden')};$('tolog').onclick=()=>{$('signup').classList.add('hidden');$('login').classList.remove('hidden')};$('ca').onclick=async()=>{let n=$('sn').value.trim(),e=$('se').value.trim(),p=$('sp').value,c=$('sc').value;if(!n||!e||!p||!c)return say('sm','सभी details भरें');if(p.length<6)return say('sm','Password कम से कम 6 characters का होना चाहिए');if(p!==c)return say('sm','Password और Confirm Password समान नहीं हैं');try{let r=await createUserWithEmailAndPassword(auth,e,p);await updateProfile(r.user,{displayName:n});say('sm','Account बन गया! 🎉',true)}catch(x){say('sm',err(x))}};$('lb').onclick=async()=>{let e=$('le').value.trim(),p=$('lp').value;if(!e||!p)return say('lm','Email और Password भरें');try{await signInWithEmailAndPassword(auth,e,p)}catch(x){say('lm',err(x))}};$('fp').onclick=async()=>{let e=$('le').value.trim();if(!e)return say('lm','पहले Email डालें');try{await sendPasswordResetEmail(auth,e);say('lm','Password reset email भेज दिया गया है 📧',true)}catch(x){say('lm',err(x))}};$('logout').onclick=()=>signOut(auth);let user=null;onAuthStateChanged(auth,u=>{user=u;if(u){$('auth').classList.add('hidden');$('home').classList.remove('hidden');$('uname').textContent=u.displayName||u.email.split('@')[0];$('hb').textContent=localStorage.getItem('best_'+u.uid)||0}else{$('auth').classList.remove('hidden');$('home').classList.add('hidden');$('game').classList.add('hidden')}});
-const N=8,colors=['#1e8fff','#31d244','#ff4f9a','#ffab3d','#a855f7','#19d3c5'],shapes=[[[1]],[[1,1]],[[1,1,1]],[[1,1,1,1]],[[1,1],[1,1]],[[1,0],[1,1]],[[0,1],[1,1]],[[1,1,1],[0,1,0]],[[1,1,0],[0,1,1]],[[1,0,0],[1,1,1]],[[0,0,1],[1,1,1]]];let B=[],P=[],sel=null,score=0,combo=0;
-function empty(){return Array.from({length:N},()=>Array(N).fill(null))}function rnd(){let a=shapes[Math.floor(Math.random()*shapes.length)];return{a:a.map(r=>r.slice()),c:colors[Math.floor(Math.random()*colors.length)]}}function newPieces(){P=[rnd(),rnd(),rnd()];drawP()}function fit(p,r,c){let z=[];for(let y=0;y<p.a.length;y++)for(let x=0;x<p.a[y].length;x++)if(p.a[y][x]){let R=r+y,C=c+x;if(R<0||R>=N||C<0||C>=N||B[R][C])return null;z.push([R,C])}return z}function draw(pre=[]){let d=$('board');d.innerHTML='';for(let r=0;r<N;r++)for(let c=0;c<N;c++){let e=document.createElement('div');e.className='cell';if(B[r][c]){e.classList.add('filled');e.style.background=B[r][c];e.style.color=B[r][c]}if(pre.some(q=>q[0]==r&&q[1]==c)){e.style.background=sel.c;e.style.color=sel.c;e.style.opacity=.5}d.appendChild(e)}}function drawP(){let d=$('pieces');d.innerHTML='';P.forEach((p,i)=>{let e=document.createElement('div');e.className='piece';if(p){let m=document.createElement('div');m.className='mini';m.style.gridTemplateColumns=`repeat(${p.a[0].length},22px)`;p.a.forEach(row=>row.forEach(v=>{let x=document.createElement('div');x.className='mc';if(v){x.style.background=p.c;x.style.color=p.c}m.appendChild(x)}));e.appendChild(m);e.onpointerdown=q=>drag(q,i)}d.appendChild(e)})}function clear(){let R=[],C=[];for(let r=0;r<N;r++)if(B[r].every(Boolean))R.push(r);for(let c=0;c<N;c++)if(B.every(row=>row[c]))C.push(c);R.forEach(r=>B[r].fill(null));C.forEach(c=>B.forEach(row=>row[c]=null));return R.length+C.length}function any(){return P.some(p=>p&&Array.from({length:N},(_,r)=>Array.from({length:N},(_,c)=>fit(p,r,c)).some(Boolean)))}function best(){let k='best_'+user.uid,o=+localStorage.getItem(k)||0;if(score>o)localStorage.setItem(k,score);let b=Math.max(score,o);$('best').textContent=b;$('hb').textContent=b;return b}function end(){let b=best();$('fs').textContent=score;$('fb').textContent=b;$('over').classList.remove('hidden')}
-function drag(ev,i){if(!P[i])return;ev.preventDefault();sel=P[i];let move=e=>{let r=$('board').getBoundingClientRect(),cw=r.width/N,c=Math.floor((e.clientX-r.left)/cw-sel.a[0].length/2),rr=Math.floor((e.clientY-r.top)/cw-sel.a.length/2),z=fit(sel,rr,c);draw(z||[])};let up=e=>{removeEventListener('pointermove',move);removeEventListener('pointerup',up);let r=$('board').getBoundingClientRect(),cw=r.width/N,c=Math.floor((e.clientX-r.left)/cw-sel.a[0].length/2),rr=Math.floor((e.clientY-r.top)/cw-sel.a.length/2),z=fit(sel,rr,c);if(!z){sel=null;draw();return}z.forEach(([R,C])=>B[R][C]=sel.c);score+=z.length*10;let n=clear();if(n){combo++;score+=n*100+Math.max(0,combo-1)*50}else combo=0;$('score').textContent=score;$('combo').textContent=combo;P[i]=null;sel=null;if(P.every(x=>!x))newPieces();else drawP();draw();if(!any())end()};addEventListener('pointermove',move);addEventListener('pointerup',up)}function start(){B=empty();P=[];score=0;combo=0;$('score').textContent=0;$('combo').textContent=0;$('best').textContent=localStorage.getItem('best_'+user.uid)||0;newPieces();draw();$('over').classList.add('hidden')}
-$('play').onclick=()=>{$('home').classList.add('hidden');$('game').classList.remove('hidden');start()};$('new').onclick=start;$('gh').onclick=()=>{$('game').classList.add('hidden');$('home').classList.remove('hidden')};$('again').onclick=start;$('oh').onclick=()=>{$('over').classList.add('hidden');$('game').classList.add('hidden');$('home').classList.remove('hidden')};if('serviceWorker'in navigator)navigator.serviceWorker.register('./sw.js');
-</script></body></html>
+
+import {
+  initializeApp
+} from
+'https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js';
+
+import {
+  getAuth,
+  onAuthStateChanged,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  signOut,
+  updateProfile,
+  sendPasswordResetEmail
+} from
+'https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js';
+
+
+/* ================= FIREBASE ================= */
+
+const app = initializeApp({
+
+  apiKey:
+  'AIzaSyCSNjBkHBBWz0_f3u0yES65DZlHAhcswg',
+
+  authDomain:
+  'iq-master-f5897.firebaseapp.com',
+
+  projectId:
+  'iq-master-f5897',
+
+  storageBucket:
+  'iq-master-f5897.firebasestorage.app',
+
+  messagingSenderId:
+  '406382595192',
+
+  appId:
+  '1:406382595192:web:26449cbb2802b9497bb18d',
+
+  measurementId:
+  'G-SGW9XJCFZ3'
+
+});
+
+const auth = getAuth(app);
+
+const $ = x => document.getElementById(x);
+
+
+/* ================= AUTH ================= */
+
+const say = (id,t,ok=false) => {
+
+  $(id).textContent = t;
+
+  $(id).style.color =
+    ok ? '#6ee7a0' : '#ff8d8d';
+
+};
+
+const err = e => ({
+
+  'auth/email-already-in-use':
+  'यह Email पहले से registered है। Login या Forgot Password करें।',
+
+  'auth/invalid-email':
+  'Email सही नहीं है।',
+
+  'auth/weak-password':
+  'Password कम से कम 6 characters का होना चाहिए।',
+
+  'auth/invalid-credential':
+  'Email या Password गलत है।',
+
+  'auth/user-not-found':
+  'Account नहीं मिला।',
+
+  'auth/too-many-requests':
+  'बहुत ज्यादा कोशिशें हुई हैं। थोड़ी देर बाद try करें।'
+
+}[e.code] || 'कुछ समस्या हुई।');
+
+
+$('tos').onclick = () => {
+
+  $('login').classList.add('hidden');
+  $('signup').classList.remove('hidden');
+
+};
+
+
+$('tolog').onclick = () => {
+
+  $('signup').classList.add('hidden');
+  $('login').classList.remove('hidden');
+
+};
+
+
+$('ca').onclick = async () => {
+
+  let n = $('sn').value.trim();
+  let e = $('se').value.trim();
+  let p = $('sp').value;
+  let c = $('sc').value;
+
+  if(!n || !e || !p || !c)
+    return say('sm','सभी details भरें');
+
+  if(p.length < 6)
+    return say('sm','Password कम से कम 6 characters का होना चाहिए');
+
+  if(p !== c)
+    return say('sm','Password और Confirm Password समान नहीं हैं');
+
+  try{
+
+    let r =
+      await createUserWithEmailAndPassword(
+        auth,e,p
+      );
+
+    await updateProfile(
+      r.user,
+      {displayName:n}
+    );
+
+    say(
+      'sm',
+      'Account बन गया! 🎉',
+      true
+    );
+
+  }catch(x){
+
+    say('sm',err(x));
+
+  }
+
+};
+
+
+$('lb').onclick = async () => {
+
+  let e = $('le').value.trim();
+  let p = $('lp').value;
+
+  if(!e || !p)
+    return say(
+      'lm',
+      'Email और Password भरें'
+    );
+
+  try{
+
+    await signInWithEmailAndPassword(
+      auth,e,p
+    );
+
+  }catch(x){
+
+    say('lm',err(x));
+
+  }
+
+};
+
+
+$('fp').onclick = async () => {
+
+  let e = $('le').value.trim();
+
+  if(!e)
+    return say(
+      'lm',
+      'पहले Email डालें'
+    );
+
+  try{
+
+    await sendPasswordResetEmail(auth,e);
+
+    say(
+      'lm',
+      'Password reset email भेज दिया गया है 📧',
+      true
+    );
+
+  }catch(x){
+
+    say('lm',err(x));
+
+  }
+
+};
+
+
+$('logout').onclick = () =>
+  signOut(auth);
+
+
+/* ================= GAME DATA ================= */
+
+const N = 8;
+
+const colors = [
+  '#1e8fff',
+  '#31d244',
+  '#ff4f9a',
+  '#ffab3d',
+  '#a855f7',
+  '#19d3c5'
+];
+
+const shapes = [
+
+  [[1]],
+
+  [[1,1]],
+
+  [[1,1,1]],
+
+  [[1,1,1,1]],
+
+  [[1,1],
+   [1,1]],
+
+  [[1,0],
+   [1,1]],
+
+  [[0,1],
+   [1,1]],
+
+  [[1,1,1],
+   [0,1,0]],
+
+  [[1,1,0],
+   [0,1,1]],
+
+  [[1,0,0],
+   [1,1,1]],
+
+  [[0,0,1],
+   [1,1,1]]
+
+];
+
+
+/* ================= STATE ================= */
+
+let B = [];
+
+let P = [];
+
+let score = 0;
+
+let combo = 0;
+
+let user = null;
+
+let progress = {
+  level:1,
+  xp:0
+};
+
+let soundOn = true;
+
+let audioCtx = null;
+
+let cellEls = [];
+
+let dragState = null;
+
+
+/* ================= BOARD ================= */
+
+function empty(){
+
+  return Array.from(
+    {length:N},
+    () => Array(N).fill(null)
+  );
+
+}
+
+
+function buildBoard(){
+
+  const board = $('board');
+
+  board.innerHTML = '';
+
+  cellEls = [];
+
+  for(let i=0;i<64;i++){
+
+    const d =
+      document.createElement('div');
+
+    d.className = 'cell';
+
+    board.appendChild(d);
+
+    cellEls.push(d);
+
+  }
+
+}
+
+
+buildBoard();
+
+
+/* ================= PROGRESS ================= */
+
+function xpNeeded(level){
+
+  return 100 + (level - 1) * 20;
+
+}
+
+
+function progressKey(){
+
+  return user ?
+    'progress_' + user.uid :
+    null;
+
+}
+
+
+function loadProgress(){
+
+  if(!user) return;
+
+  try{
+
+    const data =
+      JSON.parse(
+        localStorage.getItem(
+          progressKey()
+        ) || '{}'
+      );
+
+    progress.level =
+      Math.min(
+        100,
+        Math.max(
+          1,
+          Number(data.level) || 1
+        )
+      );
+
+    progress.xp =
+      Math.max(
+        0,
+        Number(data.xp) || 0
+      );
+
+  }catch{
+
+    progress = {
+      level:1,
+      xp:0
+    };
+
+  }
+
+  updateProgressUI();
+
+}
+
+
+function saveProgress(){
+
+  if(!user) return;
+
+  localStorage.setItem(
+    progressKey(),
+    JSON.stringify(progress)
+  );
+
+}
+
+
+function addXP(amount){
+
+  if(progress.level >= 100){
+
+    progress.xp = 0;
+
+    saveProgress();
+
+    updateProgressUI();
+
+    return;
+
+  }
+
+  progress.xp += amount;
+
+  let leveled = false;
+
+  while(
+    progress.level < 100 &&
+    progress.xp >= xpNeeded(progress.level)
+  ){
+
+    progress.xp -=
+      xpNeeded(progress.level);
+
+    progress.level++;
+
+    leveled = true;
+
+  }
+
+  if(progress.level >= 100){
+
+    progress.level = 100;
+    progress.xp = 0;
+
+  }
+
+  saveProgress();
+
+  updateProgressUI();
+
+  if(leveled){
+
+    levelUpSound();
+
+    showPop(
+      progress.level >= 100 ?
+      '🏆 MASTER LEVEL!' :
+      '⭐ LEVEL UP!'
+    );
+
+    excitedVoice(
+      progress.level >= 100 ?
+      'Master Level!' :
+      'Level Up!'
+    );
+
+  }
+
+}
+
+
+function updateProgressUI(){
+
+  const need =
+    xpNeeded(progress.level);
+
+  const percent =
+    progress.level >= 100 ?
+    100 :
+    Math.min(
+      100,
+      progress.xp / need * 100
+    );
+
+  $('level').textContent =
+    progress.level;
+
+  $('xpText').textContent =
+    progress.level >= 100 ?
+    'MASTER LEVEL' :
+    `${progress.xp} / ${need} XP`;
+
+  $('xpFill').style.width =
+    percent + '%';
+
+  $('homeLevel').textContent =
+    progress.level;
+
+  $('homeXP').textContent =
+    progress.level >= 100 ?
+    'MASTER LEVEL' :
+    `${progress.xp} / ${need} XP`;
+
+  $('homeXPFill').style.width =
+    percent + '%';
+
+}
+
+
+/* ================= SOUND ================= */
+
+function ensureAudio(){
+
+  if(!soundOn) return;
+
+  try{
+
+    if(!audioCtx){
+
+      audioCtx =
+        new (
+          window.AudioContext ||
+          window.webkitAudioContext
+        )();
+
+    }
+
+    if(audioCtx.state === 'suspended')
+      audioCtx.resume();
+
+  }catch{}
+
+}
+
+
+function tone(
+  freq,
+  duration,
+  type='sine',
+  gain=.07,
+  delay=0
+){
+
+  if(!soundOn) return;
+
+  ensureAudio();
+
+  if(!audioCtx) return;
+
+  const t =
+    audioCtx.currentTime + delay;
+
+  const o =
+    audioCtx.createOscillator();
+
+  const g =
+    audioCtx.createGain();
+
+  o.type = type;
+
+  o.frequency.setValueAtTime(
+    freq,
+    t
+  );
+
+  g.gain.setValueAtTime(
+    .0001,
+    t
+  );
+
+  g.gain.exponentialRampToValueAtTime(
+    gain,
+    t + .01
+  );
+
+  g.gain.exponentialRampToValueAtTime(
+    .0001,
+    t + duration
+  );
+
+  o.connect(g);
+
+  g.connect(
+    audioCtx.destination
+  );
+
+  o.start(t);
+
+  o.stop(
+    t + duration + .03
+  );
+
+}
+
+
+function popSound(lines=1){
+
+  if(!soundOn) return;
+
+  tone(
+    260 + lines * 70,
+    .09,
+    'square',
+    .08
+  );
+
+  tone(
+    520 + lines * 90,
+    .12,
+    'sine',
+    .06,
+    .06
+  );
+
+}
+
+
+function comboSound(c){
+
+  if(!soundOn) return;
+
+  tone(
+    500 + c * 70,
+    .10,
+    'triangle',
+    .08
+  );
+
+  tone(
+    700 + c * 90,
+    .14,
+    'triangle',
+    .07,
+    .08
+  );
+
+}
+
+
+function gameOverSound(){
+
+  if(!soundOn) return;
+
+  tone(
+    300,
+    .16,
+    'sawtooth',
+    .06
+  );
+
+  tone(
+    220,
+    .22,
+    'sawtooth',
+    .05,
+    .15
+  );
+
+  tone(
+    140,
+    .30,
+    'sawtooth',
+    .04,
+    .35
+  );
+
+}
+
+
+function levelUpSound(){
+
+  if(!soundOn) return;
+
+  tone(
+    500,
+    .10,
+    'sine',
+    .07
+  );
+
+  tone(
+    700,
+    .10,
+    'sine',
+    .07,
+    .10
+  );
+
+  tone(
+    1000,
+    .18,
+    'sine',
+    .08,
+    .20
+  );
+
+}
+
+
+function excitedVoice(text){
+
+  if(!soundOn) return;
+
+  if(!('speechSynthesis' in window))
+    return;
+
+  try{
+
+    speechSynthesis.cancel();
+
+    const u =
+      new SpeechSynthesisUtterance(text);
+
+    u.rate = 1.15;
+
+    u.pitch = 1.35;
+
+    u.volume = .8;
+
+    speechSynthesis.speak(u);
+
+  }catch{}
+
+}
+
+
+function showPop(text){
+
+  const el = $('popText');
+
+  el.textContent = text;
+
+  el.classList.remove('show');
+
+  void el.offsetWidth;
+
+  el.classList.add('show');
+
+}
+
+
+/* ================= SOUND BUTTON ================= */
+
+function updateSoundButtons(){
+
+  const icon =
+    soundOn ? '🔊' : '🔇';
+
+  $('sound').textContent = icon;
+
+  $('homeSound').textContent = icon;
+
+}
+
+
+function toggleSound(){
+
+  soundOn = !soundOn;
+
+  updateSoundButtons();
+
+  if(soundOn){
+
+    ensureAudio();
+
+    tone(
+      700,
+      .08,
+      'sine',
+      .06
+    );
+
+  }
+
+}
+
+
+$('sound').onclick = toggleSound;
+
+$('homeSound').onclick = toggleSound;
+
+updateSoundButtons();
+
+
+/* ================= SHAPES ================= */
+
+function rnd(){
+
+  /*
+    Higher levels gradually unlock
+    more complex shapes.
+  */
+
+  let maxIndex;
+
+  if(progress.level < 10)
+    maxIndex = 6;
+
+  else if(progress.level < 30)
+    maxIndex = 8;
+
+  else if(progress.level < 60)
+    maxIndex = 9;
+
+  else
+    maxIndex = shapes.length - 1;
+
+  const a =
+    shapes[
+      Math.floor(
+        Math.random() *
+        (maxIndex + 1)
+      )
+    ];
+
+  return {
+
+    a:a.map(
+      r => r.slice()
+    ),
+
+    c:
+      colors[
+        Math.floor(
+          Math.random() *
+          colors.length
+        )
+      ]
+
+  };
+
+}
+
+
+function newPieces(){
+
+  P = [
+    rnd(),
+    rnd(),
+    rnd()
+  ];
+
+  drawP();
+
+}
+
+
+/* ================= FIT CHECK ================= */
+
+function fit(p,r,c){
+
+  const z = [];
+
+  for(
+    let y=0;
+    y<p.a.length;
+    y++
+  ){
+
+    for(
+      let x=0;
+      x<p.a[y].length;
+      x++
+    ){
+
+      if(p.a[y][x]){
+
+        const R = r+y;
+
+        const C = c+x;
+
+        if(
+          R<0 ||
+          R>=N ||
+          C<0 ||
+          C>=N ||
+          B[R][C]
+        ){
+
+          return null;
+
+        }
+
+        z.push([R,C]);
+
+      }
+
+    }
+
+  }
+
+  return z;
+
+}
+
+
+/* ================= FAST BOARD RENDER ================= */
+
+function draw(preview=[]){
+
+  const previewSet =
+    new Set(
+      preview.map(
+        ([r,c]) => r*N+c
+      )
+    );
+
+  for(let i=0;i<64;i++){
+
+    const r =
+      Math.floor(i/N);
+
+    const c =
+      i%N;
+
+    const el =
+      cellEls[i];
+
+    el.className = 'cell';
+
+    el.style.background = '';
+
+    el.style.color = '';
+
+    el.style.opacity = '1';
+
+    el.style.boxShadow = '';
+
+    if(B[r][c]){
+
+      el.classList.add('filled');
+
+      el.style.background =
+        B[r][c];
+
+      el.style.color =
+        B[r][c];
+
+    }
+
+    if(previewSet.has(i) && sel){
+
+      el.classList.add('preview');
+
+      el.style.background =
+        sel.c;
+
+      el.style.color =
+        sel.c;
+
+    }
+
+  }
+
+}
+
+
+/* ================= PIECES ================= */
+
+function drawP(){
+
+  const d = $('pieces');
+
+  d.innerHTML = '';
+
+  P.forEach((p,i)=>{
+
+    const e =
+      document.createElement('div');
+
+    e.className = 'piece';
+
+    if(p){
+
+      const m =
+        document.createElement('div');
+
+      m.className = 'mini';
+
+      m.style.gridTemplateColumns =
+        `repeat(${p.a[0].length},22px)`;
+
+      p.a.forEach(row=>{
+
+        row.forEach(v=>{
+
+          const x =
+            document.createElement('div');
+
+          x.className = 'mc';
+
+          if(v){
+
+            x.style.background =
+              p.c;
+
+            x.style.color =
+              p.c;
+
+          }
+
+          else{
+
+            x.style.visibility =
+              'hidden';
+
+          }
+
+          m.appendChild(x);
+
+        });
+
+      });
+
+      e.appendChild(m);
+
+      e.onpointerdown =
+        ev => drag(ev,i);
+
+    }
+
+    d.appendChild(e);
+
+  });
+
+}
+
+
+/* ================= CLEAR LINES ================= */
+
+function clearLines(){
+
+  const R = [];
+
+  const C = [];
+
+  for(let r=0;r<N;r++){
+
+    if(
+      B[r].every(Boolean)
+    )
+      R.push(r);
+
+  }
+
+  for(let c=0;c<N;c++){
+
+    if(
+      B.every(
+        row => row[c]
+      )
+    )
+      C.push(c);
+
+  }
+
+  R.forEach(
+    r => B[r].fill(null)
+  );
+
+  C.forEach(
+    c =>
+      B.forEach(
+        row => row[c]=null
+      )
+  );
+
+  return R.length + C.length;
+
+}
+
+
+/* ================= ANY MOVE ================= */
+
+function any(){
+
+  for(
+    const p of P
+  ){
+
+    if(!p) continue;
+
+    for(
+      let r=0;
+      r<N;
+      r++
+    ){
+
+      for(
+        let c=0;
+        c<N;
+        c++
+      ){
+
+        if(
+          fit(p,r,c)
+        )
+          return true;
+
+      }
+
+    }
+
+  }
+
+  return false;
+
+}
+
+
+/* ================= BEST ================= */
+
+function best(){
+
+  const k =
+    'best_' + user.uid;
+
+  const old =
+    +localStorage.getItem(k) || 0;
+
+  if(score > old){
+
+    localStorage.setItem(
+      k,
+      score
+    );
+
+  }
+
+  const b =
+    Math.max(score,old);
+
+  $('best').textContent = b;
+
+  $('hb').textContent = b;
+
+  return b;
+
+}
+
+
+/* ================= GAME OVER ================= */
+
+function end(){
+
+  const b = best();
+
+  $('fs').textContent =
+    score;
+
+  $('fb').textContent =
+    b;
+
+  $('fl').textContent =
+    progress.level;
+
+  gameOverSound();
+
+  $('over')
+    .classList.remove('hidden');
+
+}
+
+
+/* ================= DRAG ENGINE ================= */
+
+let sel = null;
+
+
+function drag(ev,i){
+
+  if(!P[i])
+    return;
+
+  ev.preventDefault();
+
+  ensureAudio();
+
+  sel = P[i];
+
+  const board =
+    $('board');
+
+  /*
+    Board position is calculated
+    only ONCE when dragging starts.
+  */
+
+  const rect =
+    board.getBoundingClientRect();
+
+  const cellSize =
+    rect.width / N;
+
+  let lastR = null;
+
+  let lastC = null;
+
+  let lastPreview = [];
+
+
+  function getTarget(e){
+
+    const c =
+      Math.floor(
+        (e.clientX - rect.left) /
+        cellSize -
+        sel.a[0].length / 2
+      );
+
+    const r =
+      Math.floor(
+        (e.clientY - rect.top) /
+        cellSize -
+        sel.a.length / 2
+      );
+
+    return {r,c};
+
+  }
+
+
+  function move(e){
+
+    const {r,c} =
+      getTarget(e);
+
+    /*
+      Most important optimization:
+      don't redraw when pointer remains
+      inside the same target cell.
+    */
+
+    if(
+      r === lastR &&
+      c === lastC
+    )
+      return;
+
+    lastR = r;
+
+    lastC = c;
+
+    const z =
+      fit(sel,r,c);
+
+    lastPreview =
+      z || [];
+
+    draw(lastPreview);
+
+  }
+
+
+  function up(e){
+
+    removeEventListener(
+      'pointermove',
+      move
+    );
+
+    removeEventListener(
+      'pointerup',
+      up
+    );
+
+    const {r,c} =
+      getTarget(e);
+
+    const z =
+      fit(sel,r,c);
+
+    if(!z){
+
+      sel = null;
+
+      draw();
+
+      return;
+
+    }
+
+
+    /* PLACE BLOCK */
+
+    z.forEach(
+      ([R,C]) =>
+        B[R][C] = sel.c
+    );
+
+
+    /*
+      Placement score:
+      5 points per block.
+    */
+
+    score +=
+      z.length * 5;
+
+
+    /*
+      XP for successfully placing.
+    */
+
+    addXP(
+      z.length * 2
+    );
+
+
+    /* CLEAR */
+
+    const n =
+      clearLines();
+
+
+    if(n){
+
+      combo++;
+
+      let lineScore = 0;
+
+      if(n===1)
+        lineScore = 100;
+
+      else if(n===2)
+        lineScore = 250;
+
+      else if(n===3)
+        lineScore = 450;
+
+      else
+        lineScore = 700;
+
+
+      score +=
+        lineScore;
+
+
+      /*
+        Combo bonus.
+      */
+
+      if(combo===2)
+        score += 50;
+
+      else if(combo===3)
+        score += 100;
+
+      else if(combo>=4)
+        score += 200;
+
+
+      /*
+        XP for clearing lines.
+      */
+
+      let xp = 0;
+
+      if(n===1)
+        xp = 20;
+
+      else if(n===2)
+        xp = 50;
+
+      else if(n===3)
+        xp = 90;
+
+      else
+        xp = 140;
+
+
+      if(combo===2)
+        xp += 15;
+
+      else if(combo===3)
+        xp += 30;
+
+      else if(combo>=4)
+        xp += 50;
+
+
+      addXP(xp);
+
+
+      popSound(n);
+
+
+      if(combo>=2){
+
+        comboSound(combo);
+
+        showPop(
+          `🔥 COMBO ×${combo}!`
+        );
+
+        excitedVoice(
+          combo>=4 ?
+          'Awesome!' :
+          combo>=3 ?
+          'Great!' :
+          'Nice!'
+        );
+
+      }
+      else{
+
+        showPop(
+          n>=3 ?
+          '🔥 AMAZING!' :
+          '💥 NICE!'
+        );
+
+        excitedVoice(
+          n>=3 ?
+          'Awesome!' :
+          'Nice!'
+        );
+
+      }
+
+    }
+    else{
+
+      combo = 0;
+
+    }
+
+
+    $('score').textContent =
+      score;
+
+    $('combo').textContent =
+      combo;
+
+
+    P[i] = null;
+
+    sel = null;
+
+
+    if(
+      P.every(
+        x => !x
+      )
+    ){
+
+      newPieces();
+
+    }
+    else{
+
+      drawP();
+
+    }
+
+
+    draw();
+
+
+    /*
+      Check game over AFTER move.
+    */
+
+    if(!any())
+      end();
+
+  }
+
+
+  addEventListener(
+    'pointermove',
+    move,
+    {passive:false}
+  );
+
+  addEventListener(
+    'pointerup',
+    up,
+    {once:true}
+  );
+
+}
+
+
+/* ================= START GAME ================= */
+
+function start(){
+
+  ensureAudio();
+
+  B = empty();
+
+  P = [];
+
+  score = 0;
+
+  combo = 0;
+
+  $('score').textContent =
+    '0';
+
+  $('combo').textContent =
+    '0';
+
+  $('best').textContent =
+    localStorage.getItem(
+      'best_' + user.uid
+    ) || '0';
+
+  updateProgressUI();
+
+  newPieces();
+
+  draw();
+
+  $('over')
+    .classList.add('hidden');
+
+}
+
+
+/* ================= AUTH STATE ================= */
+
+onAuthStateChanged(
+  auth,
+  u => {
+
+    user = u;
+
+    if(u){
+
+      $('auth')
+        .classList.add('hidden');
+
+      $('home')
+        .classList.remove('hidden');
+
+      $('uname').textContent =
+        u.displayName ||
+        u.email.split('@')[0];
+
+      $('hb').textContent =
+        localStorage.getItem(
+          'best_' + u.uid
+        ) || '0';
+
+      loadProgress();
+
+    }
+    else{
+
+      $('auth')
+        .classList.remove('hidden');
+
+      $('home')
+        .classList.add('hidden');
+
+      $('game')
+        .classList.add('hidden');
+
+    }
+
+  }
+);
+
+
+/* ================= NAVIGATION ================= */
+
+$('play').onclick = () => {
+
+  $('home')
+    .classList.add('hidden');
+
+  $('game')
+    .classList.remove('hidden');
+
+  start();
+
+};
+
+
+$('new').onclick =
+  start;
+
+
+$('gh').onclick = () => {
+
+  $('game')
+    .classList.add('hidden');
+
+  $('home')
+    .classList.remove('hidden');
+
+};
+
+
+$('again').onclick =
+  start;
+
+
+$('oh').onclick = () => {
+
+  $('over')
+    .classList.add('hidden');
+
+  $('game')
+    .classList.add('hidden');
+
+  $('home')
+    .classList.remove('hidden');
+
+};
+
+
+/* ================= PWA ================= */
+
+if(
+  'serviceWorker' in navigator
+){
+
+  navigator.serviceWorker.register(
+    './sw.js'
+  );
+
+}
+
+</script>
+
+</body>
+    </html>
