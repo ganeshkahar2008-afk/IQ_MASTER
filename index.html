@@ -12,240 +12,245 @@
 *{box-sizing:border-box}
 
 body{
-  margin:0;
-  background:#061b45;
-  color:#fff;
-  font-family:Arial,sans-serif;
-  -webkit-tap-highlight-color:transparent;
+margin:0;
+background:#061b45;
+color:#fff;
+font-family:Arial,sans-serif;
+-webkit-tap-highlight-color:transparent;
 }
 
 .wrap{
-  max-width:520px;
-  margin:auto;
-  padding:14px;
+max-width:520px;
+margin:auto;
+padding:14px;
 }
 
 .card{
-  background:#0d2a5c;
-  border:1px solid #294d83;
-  border-radius:18px;
-  padding:16px;
-  box-shadow:0 8px 28px #0006;
+background:#0d2a5c;
+border:1px solid #294d83;
+border-radius:18px;
+padding:16px;
+box-shadow:0 8px 28px #0006;
 }
 
 h1,h2{text-align:center}
 
 input{
-  width:100%;
-  padding:13px;
-  margin:6px 0;
-  border:0;
-  border-radius:10px;
-  font-size:16px;
+width:100%;
+padding:13px;
+margin:6px 0;
+border:0;
+border-radius:10px;
+font-size:16px;
 }
 
 button{
-  border:0;
-  border-radius:10px;
-  padding:11px 14px;
-  font-size:15px;
-  cursor:pointer;
-  touch-action:manipulation;
+border:0;
+border-radius:10px;
+padding:11px 14px;
+font-size:15px;
+cursor:pointer;
 }
 
 .primary{
-  background:#1769d1;
-  color:#fff;
-  width:100%;
-  margin-top:8px;
+background:#1769d1;
+color:#fff;
+width:100%;
+margin-top:8px;
 }
 
 .secondary{
-  background:#dfe9f8;
-  color:#09224b;
+background:#dfe9f8;
+color:#09224b;
 }
 
 .hidden{display:none!important}
 
 .msg{
-  text-align:center;
-  min-height:20px;
+text-align:center;
+min-height:20px;
+margin:10px 0;
 }
 
 .info{
-  text-align:center;
-  color:#cbd9ef;
-  font-size:13px;
+text-align:center;
+color:#cbd9ef;
+font-size:13px;
 }
 
-.userbar,
-.scorebar{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:8px;
+.userbar,.scorebar{
+display:flex;
+justify-content:space-between;
+align-items:center;
+gap:8px;
 }
 
 .scorebar{
-  margin:12px 0;
-  flex-wrap:wrap;
+margin:12px 0;
+flex-wrap:wrap;
 }
 
 .badge{
-  background:#102f63;
-  padding:8px 10px;
-  border-radius:12px;
+background:#102f63;
+padding:8px 10px;
+border-radius:12px;
 }
 
 .levelBox{
-  background:#09224b;
-  border:1px solid #294d83;
-  border-radius:12px;
-  padding:10px;
-  margin:10px 0;
+background:#09224b;
+border:1px solid #294d83;
+border-radius:12px;
+padding:10px;
+margin:10px 0;
 }
 
 .levelTop{
-  display:flex;
-  justify-content:space-between;
-  font-weight:bold;
+display:flex;
+justify-content:space-between;
+font-weight:bold;
 }
 
 .xpBar{
-  height:8px;
-  background:#061b45;
-  border-radius:10px;
-  overflow:hidden;
-  margin-top:7px;
+height:8px;
+background:#061b45;
+border-radius:10px;
+overflow:hidden;
+margin-top:7px;
 }
 
 .xpFill{
-  height:100%;
-  width:0%;
-  background:#31d244;
-  transition:width .25s ease;
+height:100%;
+width:0%;
+background:#31d244;
+transition:width .25s ease;
 }
 
 #board{
-  width:min(92vw,420px);
-  aspect-ratio:1;
-  margin:12px auto;
-  display:grid;
-  grid-template-columns:repeat(8,1fr);
-  gap:4px;
-  touch-action:none;
-  user-select:none;
+width:min(92vw,420px);
+aspect-ratio:1;
+margin:12px auto;
+display:grid;
+grid-template-columns:repeat(8,1fr);
+gap:4px;
+touch-action:none;
+user-select:none;
 }
 
 .cell{
-  background:#102a52;
-  border:1px solid #183c70;
-  border-radius:5px;
-  transition:background .08s,box-shadow .08s,opacity .08s;
+background:#102a52;
+border:1px solid #183c70;
+border-radius:5px;
 }
 
 .cell.filled{
-  box-shadow:0 0 9px currentColor;
+box-shadow:0 0 9px currentColor;
 }
 
 .cell.preview{
-  opacity:.5;
-  box-shadow:0 0 12px currentColor;
+opacity:.5;
+box-shadow:0 0 12px currentColor;
 }
 
 .pieces{
-  display:flex;
-  justify-content:space-around;
-  gap:8px;
+display:flex;
+justify-content:space-around;
+gap:8px;
 }
 
 .piece{
-  width:31%;
-  min-height:92px;
-  background:#09224b;
-  border:1px solid #294d83;
-  border-radius:14px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  touch-action:none;
-  user-select:none;
-  transition:transform .08s;
-}
-
-.piece:active{
-  transform:scale(.96);
+width:31%;
+min-height:92px;
+background:#09224b;
+border:1px solid #294d83;
+border-radius:14px;
+display:flex;
+align-items:center;
+justify-content:center;
+touch-action:none;
+user-select:none;
 }
 
 .mini{
-  display:grid;
-  gap:3px;
+display:grid;
+gap:3px;
 }
 
 .mc{
-  width:22px;
-  height:22px;
-  border-radius:4px;
-  box-shadow:0 0 7px currentColor;
+width:22px;
+height:22px;
+border-radius:4px;
+box-shadow:0 0 7px currentColor;
 }
 
 .actions{
-  display:flex;
-  gap:8px;
-  margin-top:10px;
+display:flex;
+gap:8px;
+margin-top:10px;
 }
 
 .actions button{
-  flex:1;
+flex:1;
 }
 
 .soundBtn{
-  font-size:18px;
-  padding:8px 10px;
+font-size:18px;
+padding:8px 10px;
 }
 
 .overlay{
-  position:fixed;
-  inset:0;
-  background:#020b1dcc;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  padding:20px;
-  z-index:5;
+position:fixed;
+inset:0;
+background:#020b1dcc;
+display:flex;
+align-items:center;
+justify-content:center;
+padding:20px;
+z-index:5;
 }
 
 .modal{
-  width:min(400px,100%);
-  background:#0d2a5c;
-  border:1px solid #3b649b;
-  border-radius:18px;
-  padding:22px;
-  text-align:center;
+width:min(400px,100%);
+background:#0d2a5c;
+border:1px solid #3b649b;
+border-radius:18px;
+padding:22px;
+text-align:center;
 }
 
 .popText{
-  position:fixed;
-  left:50%;
-  top:42%;
-  transform:translate(-50%,-50%) scale(.7);
-  font-size:30px;
-  font-weight:bold;
-  pointer-events:none;
-  opacity:0;
-  z-index:20;
-  text-shadow:0 0 15px currentColor;
+position:fixed;
+left:50%;
+top:42%;
+transform:translate(-50%,-50%) scale(.7);
+font-size:30px;
+font-weight:bold;
+pointer-events:none;
+opacity:0;
+z-index:20;
+text-shadow:0 0 15px currentColor;
 }
 
 .popText.show{
-  animation:popText .7s ease-out;
+animation:popText .7s ease-out;
 }
 
 @keyframes popText{
-  0%{opacity:0;transform:translate(-50%,-50%) scale(.6)}
-  20%{opacity:1;transform:translate(-50%,-50%) scale(1.15)}
-  70%{opacity:1;transform:translate(-50%,-65%) scale(1)}
-  100%{opacity:0;transform:translate(-50%,-85%) scale(.9)}
+0%{
+opacity:0;
+transform:translate(-50%,-50%) scale(.6)
+}
+20%{
+opacity:1;
+transform:translate(-50%,-50%) scale(1.15)
+}
+70%{
+opacity:1;
+transform:translate(-50%,-65%) scale(1)
+}
+100%{
+opacity:0;
+transform:translate(-50%,-85%) scale(.9)
+}
 }
 </style>
 </head>
@@ -254,132 +259,217 @@ button{
 
 <div class="wrap">
 
-<!-- AUTH -->
+<!-- LOGIN -->
 <div id="auth" class="card">
-  <h1>🧠 IQ MASTER</h1>
-  <p class="info">Brain Blocks — Drag, Place & Clear!</p>
 
-  <div id="login">
-    <h2>Login</h2>
+<h1>🧠 IQ MASTER</h1>
 
-    <input id="le" type="email" placeholder="Email Address">
-    <input id="lp" type="password" placeholder="Password">
+<p class="info">
+Brain Blocks — Drag, Place & Clear!
+</p>
 
-    <button id="lb" class="primary">Login</button>
-    <button id="fp" class="secondary" style="width:100%;margin-top:8px">
-      Forgot Password?
-    </button>
+<div id="login">
 
-    <p id="lm" class="msg"></p>
+<h2>Login</h2>
 
-    <button id="tos" class="secondary" style="width:100%">
-      Create Account
-    </button>
-  </div>
+<input
+id="le"
+type="email"
+placeholder="Email Address"
+autocomplete="email">
 
-  <div id="signup" class="hidden">
-    <h2>Create Account</h2>
+<input
+id="lp"
+type="password"
+placeholder="Password"
+autocomplete="current-password">
 
-    <input id="sn" placeholder="Full Name">
-    <input id="se" type="email" placeholder="Email Address">
-    <input id="sp" type="password" placeholder="Password">
-    <input id="sc" type="password" placeholder="Confirm Password">
+<button id="lb" class="primary">
+Login
+</button>
 
-    <button id="ca" class="primary">Create Account</button>
+<button
+id="fp"
+class="secondary"
+style="width:100%;margin-top:8px">
+Forgot Password?
+</button>
 
-    <p id="sm" class="msg"></p>
+<p id="lm" class="msg"></p>
 
-    <button id="tolog" class="secondary" style="width:100%">
-      ← Back to Login
-    </button>
-  </div>
+<button
+id="tos"
+class="secondary"
+style="width:100%">
+Create Account
+</button>
+
+</div>
+
+
+<!-- SIGNUP -->
+
+<div id="signup" class="hidden">
+
+<h2>Create Account</h2>
+
+<input
+id="sn"
+placeholder="Full Name">
+
+<input
+id="se"
+type="email"
+placeholder="Email Address">
+
+<input
+id="sp"
+type="password"
+placeholder="Password">
+
+<input
+id="sc"
+type="password"
+placeholder="Confirm Password">
+
+<button id="ca" class="primary">
+Create Account
+</button>
+
+<p id="sm" class="msg"></p>
+
+<button
+id="tolog"
+class="secondary"
+style="width:100%">
+← Back to Login
+</button>
+
+</div>
+
 </div>
 
 
 <!-- HOME -->
+
 <div id="home" class="card hidden">
-  <h1>🧩 Brain Blocks</h1>
 
-  <p class="info">
-    Welcome, <b id="uname">Player</b> 👋
-  </p>
+<h1>🧩 Brain Blocks</h1>
 
-  <div class="levelBox">
-    <div class="levelTop">
-      <span>🏆 Level <b id="homeLevel">1</b></span>
-      <span id="homeXP">0 / 100 XP</span>
-    </div>
+<p class="info">
+Welcome, <b id="uname">Player</b> 👋
+</p>
 
-    <div class="xpBar">
-      <div id="homeXPFill" class="xpFill"></div>
-    </div>
-  </div>
+<div class="levelBox">
 
-  <button id="play" class="primary">
-    🎮 PLAY GAME
-  </button>
+<div class="levelTop">
+<span>🏆 Level <b id="homeLevel">1</b></span>
+<span id="homeXP">0 / 100 XP</span>
+</div>
 
-  <div class="actions">
-    <button id="logout" class="secondary">Logout</button>
-    <button id="homeSound" class="secondary soundBtn">🔊</button>
-  </div>
+<div class="xpBar">
+<div id="homeXPFill" class="xpFill"></div>
+</div>
 
-  <p class="info">
-    Best Score: <b id="hb">0</b>
-  </p>
+</div>
+
+<button id="play" class="primary">
+🎮 PLAY GAME
+</button>
+
+<div class="actions">
+
+<button id="logout" class="secondary">
+Logout
+</button>
+
+<button id="homeSound" class="secondary soundBtn">
+🔊
+</button>
+
+</div>
+
+<p class="info">
+Best Score: <b id="hb">0</b>
+</p>
+
 </div>
 
 
 <!-- GAME -->
+
 <div id="game" class="card hidden">
 
-  <div class="userbar">
-    <b>🧩 Brain Blocks</b>
+<div class="userbar">
 
-    <div>
-      <button id="sound" class="secondary soundBtn">🔊</button>
-      <button id="gh" class="secondary">Home</button>
-    </div>
-  </div>
+<b>🧩 Brain Blocks</b>
 
-  <div class="scorebar">
-    <span class="badge">
-      Score: <b id="score">0</b>
-    </span>
+<div>
+<button id="sound" class="secondary soundBtn">
+🔊
+</button>
 
-    <span class="badge">
-      Combo: <b id="combo">0</b>🔥
-    </span>
+<button id="gh" class="secondary">
+Home
+</button>
+</div>
 
-    <span class="badge">
-      Best: <b id="best">0</b>
-    </span>
-  </div>
+</div>
 
-  <div class="levelBox">
-    <div class="levelTop">
-      <span>⭐ Level <b id="level">1</b></span>
-      <span id="xpText">0 / 100 XP</span>
-    </div>
 
-    <div class="xpBar">
-      <div id="xpFill" class="xpFill"></div>
-    </div>
-  </div>
+<div class="scorebar">
 
-  <div id="board"></div>
+<span class="badge">
+Score: <b id="score">0</b>
+</span>
 
-  <p id="gm" class="info">
-    नीचे से shape चुनकर board पर रखें।
-  </p>
+<span class="badge">
+Combo: <b id="combo">0</b>🔥
+</span>
 
-  <div id="pieces" class="pieces"></div>
+<span class="badge">
+Best: <b id="best">0</b>
+</span>
 
-  <div class="actions">
-    <button id="new" class="secondary">
-      🔄 New Game
-    </button>
-  </div>
+</div>
+
+
+<div class="levelBox">
+
+<div class="levelTop">
+
+<span>
+⭐ Level <b id="level">1</b>
+</span>
+
+<span id="xpText">
+0 / 100 XP
+</span>
+
+</div>
+
+<div class="xpBar">
+<div id="xpFill" class="xpFill"></div>
+</div>
+
+</div>
+
+
+<div id="board"></div>
+
+<p id="gm" class="info">
+नीचे से shape चुनकर board पर रखें।
+</p>
+
+<div id="pieces" class="pieces"></div>
+
+<div class="actions">
+
+<button id="new" class="secondary">
+🔄 New Game
+</button>
+
+</div>
 
 </div>
 
@@ -387,289 +477,479 @@ button{
 
 
 <!-- GAME OVER -->
+
 <div id="over" class="overlay hidden">
-  <div class="modal">
 
-    <h1>💥 Game Over</h1>
+<div class="modal">
 
-    <h2>
-      Score: <span id="fs">0</span>
-    </h2>
+<h1>💥 Game Over</h1>
 
-    <p>
-      Best Score: <b id="fb">0</b>
-    </p>
+<h2>
+Score: <span id="fs">0</span>
+</h2>
 
-    <p>
-      Level: <b id="fl">1</b>
-    </p>
+<p>
+Best Score: <b id="fb">0</b>
+</p>
 
-    <button id="again" class="primary">
-      🎮 Play Again
-    </button>
+<p>
+Level: <b id="fl">1</b>
+</p>
 
-    <button id="oh" class="secondary"
-      style="width:100%;margin-top:8px">
-      🏠 Home
-    </button>
+<button id="again" class="primary">
+🎮 Play Again
+</button>
 
-  </div>
+<button
+id="oh"
+class="secondary"
+style="width:100%;margin-top:8px">
+🏠 Home
+</button>
+
 </div>
+
+</div>
+
 
 <div id="popText" class="popText"></div>
 
 
 <script type="module">
 
-import {
-  initializeApp
-} from
-'https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js';
-
-import {
-  getAuth,
-  onAuthStateChanged,
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-  signOut,
-  updateProfile,
-  sendPasswordResetEmail
-} from
-'https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js';
-
-
 /* ================= FIREBASE ================= */
 
-const app = initializeApp({
+import {
+initializeApp
+} from
+"https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
 
-  apiKey:
-  apiKey:'AIzaSyCSNjBkHBBWz0_f3u0yES65DZlZHAhcswg'
+import {
+getAuth,
+onAuthStateChanged,
+createUserWithEmailAndPassword,
+signInWithEmailAndPassword,
+signOut,
+updateProfile,
+sendPasswordResetEmail
+} from
+"https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
 
-  authDomain:
-  'iq-master-f5897.firebaseapp.com',
 
-  projectId:
-  'iq-master-f5897',
+const firebaseConfig = {
 
-  storageBucket:
-  'iq-master-f5897.firebasestorage.app',
+apiKey:
+"AIzaSyCSNjBkHBBWz0_f3u0yES65DZlZHAhcswg",
 
-  messagingSenderId:
-  '406382595192',
+authDomain:
+"iq-master-f5897.firebaseapp.com",
 
-  appId:
-  '1:406382595192:web:26449cbb2802b9497bb18d',
+projectId:
+"iq-master-f5897",
 
-  measurementId:
-  'G-SGW9XJCFZ3'
+storageBucket:
+"iq-master-f5897.firebasestorage.app",
+
+messagingSenderId:
+"406382595192",
+
+appId:
+"1:406382595192:web:26449cbb2802b9497bb18d",
+
+measurementId:
+"G-SGW9XJCFZ3"
+
+};
+
+
+let app;
+
+let auth;
+
+
+/* Firebase initialization */
+
+try{
+
+app = initializeApp(firebaseConfig);
+
+auth = getAuth(app);
+
+}catch(error){
+
+console.error(error);
+
+alert(
+"Firebase Load Error:\n" +
+error.message
+);
+
+}
+
+
+/* ================= HELPERS ================= */
+
+const $ =
+id => document.getElementById(id);
+
+
+function say(
+id,
+text,
+ok=false
+){
+
+const el = $(id);
+
+el.textContent = text;
+
+el.style.color =
+ok ? "#6ee7a0" : "#ff8d8d";
+
+}
+
+
+/* ================= AUTH ERROR ================= */
+
+function authError(error){
+
+console.error(
+"Firebase Auth Error:",
+error
+);
+
+const code =
+error?.code || "";
+
+const messages = {
+
+"auth/email-already-in-use":
+"यह Email पहले से registered है।",
+
+"auth/invalid-email":
+"Email सही नहीं है।",
+
+"auth/weak-password":
+"Password कम से कम 6 characters का होना चाहिए।",
+
+"auth/invalid-credential":
+"Email या Password गलत है।",
+
+"auth/wrong-password":
+"Password गलत है।",
+
+"auth/user-not-found":
+"Account नहीं मिला।",
+
+"auth/too-many-requests":
+"बहुत ज्यादा कोशिशें हुई हैं। थोड़ी देर बाद try करें।",
+
+"auth/network-request-failed":
+"Internet connection check करें।",
+
+"auth/operation-not-allowed":
+"Firebase में Email/Password Login enable नहीं है।"
+
+};
+
+return messages[code] ||
+"Login Error: " +
+(error?.message || code || "Unknown error");
+
+}
+
+
+/* ================= LOGIN ================= */
+
+$("lb").addEventListener(
+"click",
+async()=>{
+
+const email =
+$("le").value.trim();
+
+const password =
+$("lp").value;
+
+if(!email){
+
+return say(
+"lm",
+"Email डालें"
+);
+
+}
+
+if(!password){
+
+return say(
+"lm",
+"Password डालें"
+);
+
+}
+
+if(!auth){
+
+return say(
+"lm",
+"Firebase load नहीं हुआ।"
+);
+
+}
+
+
+const btn = $("lb");
+
+btn.disabled = true;
+
+btn.textContent =
+"Logging in...";
+
+say(
+"lm",
+"Login हो रहा है...",
+true
+);
+
+
+try{
+
+await signInWithEmailAndPassword(
+auth,
+email,
+password
+);
+
+say(
+"lm",
+"Login successful! 🎉",
+true
+);
+
+}catch(error){
+
+say(
+"lm",
+authError(error)
+);
+
+}finally{
+
+btn.disabled = false;
+
+btn.textContent =
+"Login";
+
+}
 
 });
 
-const auth = getAuth(app);
 
-const $ = x => document.getElementById(x);
+/* ================= CREATE ACCOUNT ================= */
 
+$("tos").onclick = ()=>{
 
-/* ================= AUTH ================= */
+$("login")
+.classList.add("hidden");
 
-const say = (id,t,ok=false) => {
-
-  $(id).textContent = t;
-
-  $(id).style.color =
-    ok ? '#6ee7a0' : '#ff8d8d';
-
-};
-
-const err = e => ({
-
-  'auth/email-already-in-use':
-  'यह Email पहले से registered है। Login या Forgot Password करें।',
-
-  'auth/invalid-email':
-  'Email सही नहीं है।',
-
-  'auth/weak-password':
-  'Password कम से कम 6 characters का होना चाहिए।',
-
-  'auth/invalid-credential':
-  'Email या Password गलत है।',
-
-  'auth/user-not-found':
-  'Account नहीं मिला।',
-
-  'auth/too-many-requests':
-  'बहुत ज्यादा कोशिशें हुई हैं। थोड़ी देर बाद try करें।'
-
-}[e.code] || 'कुछ समस्या हुई।');
-
-
-$('tos').onclick = () => {
-
-  $('login').classList.add('hidden');
-  $('signup').classList.remove('hidden');
+$("signup")
+.classList.remove("hidden");
 
 };
 
 
-$('tolog').onclick = () => {
+$("tolog").onclick = ()=>{
 
-  $('signup').classList.add('hidden');
-  $('login').classList.remove('hidden');
+$("signup")
+.classList.add("hidden");
 
-};
-
-
-$('ca').onclick = async () => {
-
-  let n = $('sn').value.trim();
-  let e = $('se').value.trim();
-  let p = $('sp').value;
-  let c = $('sc').value;
-
-  if(!n || !e || !p || !c)
-    return say('sm','सभी details भरें');
-
-  if(p.length < 6)
-    return say('sm','Password कम से कम 6 characters का होना चाहिए');
-
-  if(p !== c)
-    return say('sm','Password और Confirm Password समान नहीं हैं');
-
-  try{
-
-    let r =
-      await createUserWithEmailAndPassword(
-        auth,e,p
-      );
-
-    await updateProfile(
-      r.user,
-      {displayName:n}
-    );
-
-    say(
-      'sm',
-      'Account बन गया! 🎉',
-      true
-    );
-
-  }catch(x){
-
-    say('sm',err(x));
-
-  }
+$("login")
+.classList.remove("hidden");
 
 };
 
 
-$('lb').onclick = async () => {
+$("ca").addEventListener(
+"click",
+async()=>{
 
-  let e = $('le').value.trim();
-  let p = $('lp').value;
+const name =
+$("sn").value.trim();
 
-  if(!e || !p)
-    return say(
-      'lm',
-      'Email और Password भरें'
-    );
+const email =
+$("se").value.trim();
 
-  try{
+const password =
+$("sp").value;
 
-    await signInWithEmailAndPassword(
-      auth,e,p
-    );
+const confirm =
+$("sc").value;
 
-  }catch(x){
 
-    say('lm',err(x));
+if(!name){
 
-  }
+return say(
+"sm",
+"Full Name डालें"
+);
+
+}
+
+if(!email){
+
+return say(
+"sm",
+"Email डालें"
+);
+
+}
+
+if(password.length < 6){
+
+return say(
+"sm",
+"Password कम से कम 6 characters का होना चाहिए"
+);
+
+}
+
+if(password !== confirm){
+
+return say(
+"sm",
+"दोनों Password समान नहीं हैं"
+);
+
+}
+
+
+try{
+
+const result =
+await createUserWithEmailAndPassword(
+auth,
+email,
+password
+);
+
+await updateProfile(
+result.user,
+{
+displayName:name
+}
+);
+
+say(
+"sm",
+"Account बन गया! 🎉",
+true
+);
+
+}catch(error){
+
+say(
+"sm",
+authError(error)
+);
+
+}
+
+});
+
+
+/* ================= FORGOT PASSWORD ================= */
+
+$("fp").onclick =
+async()=>{
+
+const email =
+$("le").value.trim();
+
+if(!email){
+
+return say(
+"lm",
+"पहले Email डालें"
+);
+
+}
+
+try{
+
+await sendPasswordResetEmail(
+auth,
+email
+);
+
+say(
+"lm",
+"Password reset email भेज दिया गया है 📧",
+true
+);
+
+}catch(error){
+
+say(
+"lm",
+authError(error)
+);
+
+}
 
 };
 
 
-$('fp').onclick = async () => {
+/* ================= LOGOUT ================= */
 
-  let e = $('le').value.trim();
+$("logout").onclick =
+()=>{
 
-  if(!e)
-    return say(
-      'lm',
-      'पहले Email डालें'
-    );
-
-  try{
-
-    await sendPasswordResetEmail(auth,e);
-
-    say(
-      'lm',
-      'Password reset email भेज दिया गया है 📧',
-      true
-    );
-
-  }catch(x){
-
-    say('lm',err(x));
-
-  }
+if(auth)
+signOut(auth);
 
 };
 
 
-$('logout').onclick = () =>
-  signOut(auth);
-
-
-/* ================= GAME DATA ================= */
+/* ================= GAME ================= */
 
 const N = 8;
 
 const colors = [
-  '#1e8fff',
-  '#31d244',
-  '#ff4f9a',
-  '#ffab3d',
-  '#a855f7',
-  '#19d3c5'
+"#1e8fff",
+"#31d244",
+"#ff4f9a",
+"#ffab3d",
+"#a855f7",
+"#19d3c5"
 ];
 
 const shapes = [
 
-  [[1]],
+[[1]],
 
-  [[1,1]],
+[[1,1]],
 
-  [[1,1,1]],
+[[1,1,1]],
 
-  [[1,1,1,1]],
+[[1,1,1,1]],
 
-  [[1,1],
-   [1,1]],
+[[1,1],[1,1]],
 
-  [[1,0],
-   [1,1]],
+[[1,0],[1,1]],
 
-  [[0,1],
-   [1,1]],
+[[0,1],[1,1]],
 
-  [[1,1,1],
-   [0,1,0]],
+[[1,1,1],[0,1,0]],
 
-  [[1,1,0],
-   [0,1,1]],
+[[1,1,0],[0,1,1]],
 
-  [[1,0,0],
-   [1,1,1]],
+[[1,0,0],[1,1,1]],
 
-  [[0,0,1],
-   [1,1,1]]
+[[0,0,1],[1,1,1]]
 
 ];
 
-
-/* ================= STATE ================= */
 
 let B = [];
 
@@ -681,52 +961,58 @@ let combo = 0;
 
 let user = null;
 
-let progress = {
-  level:1,
-  xp:0
-};
-
-let soundOn = true;
-
-let audioCtx = null;
+let sel = null;
 
 let cellEls = [];
 
-let dragState = null;
+let audioCtx = null;
+
+let soundOn = true;
+
+let progress = {
+level:1,
+xp:0
+};
 
 
 /* ================= BOARD ================= */
 
 function empty(){
 
-  return Array.from(
-    {length:N},
-    () => Array(N).fill(null)
-  );
+return Array.from(
+{length:N},
+()=>Array(N).fill(null)
+);
 
 }
 
 
 function buildBoard(){
 
-  const board = $('board');
+const board =
+$("board");
 
-  board.innerHTML = '';
+board.innerHTML = "";
 
-  cellEls = [];
+cellEls = [];
 
-  for(let i=0;i<64;i++){
+for(
+let i=0;
+i<64;
+i++
+){
 
-    const d =
-      document.createElement('div');
+const cell =
+document.createElement("div");
 
-    d.className = 'cell';
+cell.className =
+"cell";
 
-    board.appendChild(d);
+board.appendChild(cell);
 
-    cellEls.push(d);
+cellEls.push(cell);
 
-  }
+}
 
 }
 
@@ -734,176 +1020,179 @@ function buildBoard(){
 buildBoard();
 
 
-/* ================= PROGRESS ================= */
+/* ================= LEVEL ================= */
 
 function xpNeeded(level){
 
-  return 100 + (level - 1) * 20;
+return 100 +
+(level-1)*20;
 
 }
 
 
 function progressKey(){
 
-  return user ?
-    'progress_' + user.uid :
-    null;
+return "iqmaster_progress_" +
+user.uid;
 
 }
 
 
 function loadProgress(){
 
-  if(!user) return;
+if(!user)
+return;
 
-  try{
+try{
 
-    const data =
-      JSON.parse(
-        localStorage.getItem(
-          progressKey()
-        ) || '{}'
-      );
+const data =
+JSON.parse(
+localStorage.getItem(
+progressKey()
+) || "{}"
+);
 
-    progress.level =
-      Math.min(
-        100,
-        Math.max(
-          1,
-          Number(data.level) || 1
-        )
-      );
+progress.level =
+Math.min(
+100,
+Math.max(
+1,
+Number(data.level)||1
+)
+);
 
-    progress.xp =
-      Math.max(
-        0,
-        Number(data.xp) || 0
-      );
+progress.xp =
+Math.max(
+0,
+Number(data.xp)||0
+);
 
-  }catch{
+}catch{
 
-    progress = {
-      level:1,
-      xp:0
-    };
+progress={
+level:1,
+xp:0
+};
 
-  }
+}
 
-  updateProgressUI();
+updateProgress();
 
 }
 
 
 function saveProgress(){
 
-  if(!user) return;
+if(!user)
+return;
 
-  localStorage.setItem(
-    progressKey(),
-    JSON.stringify(progress)
-  );
+localStorage.setItem(
+progressKey(),
+JSON.stringify(progress)
+);
 
 }
 
 
 function addXP(amount){
 
-  if(progress.level >= 100){
+if(progress.level>=100){
 
-    progress.xp = 0;
+progress.level=100;
+progress.xp=0;
 
-    saveProgress();
+saveProgress();
 
-    updateProgressUI();
+updateProgress();
 
-    return;
+return;
 
-  }
+}
 
-  progress.xp += amount;
+progress.xp += amount;
 
-  let leveled = false;
+let levelUp = false;
 
-  while(
-    progress.level < 100 &&
-    progress.xp >= xpNeeded(progress.level)
-  ){
+while(
+progress.level < 100 &&
+progress.xp >=
+xpNeeded(progress.level)
+){
 
-    progress.xp -=
-      xpNeeded(progress.level);
+progress.xp -=
+xpNeeded(progress.level);
 
-    progress.level++;
+progress.level++;
 
-    leveled = true;
+levelUp = true;
 
-  }
+}
 
-  if(progress.level >= 100){
+if(progress.level>=100){
 
-    progress.level = 100;
-    progress.xp = 0;
+progress.level=100;
+progress.xp=0;
 
-  }
+}
 
-  saveProgress();
+saveProgress();
 
-  updateProgressUI();
+updateProgress();
 
-  if(leveled){
+if(levelUp){
 
-    levelUpSound();
+levelUpSound();
 
-    showPop(
-      progress.level >= 100 ?
-      '🏆 MASTER LEVEL!' :
-      '⭐ LEVEL UP!'
-    );
+showPop(
+progress.level>=100 ?
+"🏆 MASTER LEVEL!" :
+"⭐ LEVEL UP!"
+);
 
-    excitedVoice(
-      progress.level >= 100 ?
-      'Master Level!' :
-      'Level Up!'
-    );
+excitedVoice(
+progress.level>=100 ?
+"Master Level!" :
+"Level Up!"
+);
 
-  }
+}
 
 }
 
 
-function updateProgressUI(){
+function updateProgress(){
 
-  const need =
-    xpNeeded(progress.level);
+const need =
+xpNeeded(progress.level);
 
-  const percent =
-    progress.level >= 100 ?
-    100 :
-    Math.min(
-      100,
-      progress.xp / need * 100
-    );
+const percent =
+progress.level>=100 ?
+100 :
+(progress.xp/need)*100;
 
-  $('level').textContent =
-    progress.level;
 
-  $('xpText').textContent =
-    progress.level >= 100 ?
-    'MASTER LEVEL' :
-    `${progress.xp} / ${need} XP`;
+$("level").textContent =
+progress.level;
 
-  $('xpFill').style.width =
-    percent + '%';
+$("xpText").textContent =
+progress.level>=100 ?
+"MASTER LEVEL" :
+`${progress.xp} / ${need} XP`;
 
-  $('homeLevel').textContent =
-    progress.level;
+$("xpFill").style.width =
+percent+"%";
 
-  $('homeXP').textContent =
-    progress.level >= 100 ?
-    'MASTER LEVEL' :
-    `${progress.xp} / ${need} XP`;
 
-  $('homeXPFill').style.width =
-    percent + '%';
+$("homeLevel").textContent =
+progress.level;
+
+$("homeXP").textContent =
+progress.level>=100 ?
+"MASTER LEVEL" :
+`${progress.xp} / ${need} XP`;
+
+$("homeXPFill").style.width =
+percent+"%";
 
 }
 
@@ -912,1103 +1201,1216 @@ function updateProgressUI(){
 
 function ensureAudio(){
 
-  if(!soundOn) return;
+if(!soundOn)
+return;
 
-  try{
+try{
 
-    if(!audioCtx){
+if(!audioCtx){
 
-      audioCtx =
-        new (
-          window.AudioContext ||
-          window.webkitAudioContext
-        )();
+audioCtx =
+new (
+window.AudioContext ||
+window.webkitAudioContext
+)();
 
-    }
+}
 
-    if(audioCtx.state === 'suspended')
-      audioCtx.resume();
+if(audioCtx.state==="suspended")
+audioCtx.resume();
 
-  }catch{}
+}catch(error){
+
+console.log(error);
+
+}
 
 }
 
 
 function tone(
-  freq,
-  duration,
-  type='sine',
-  gain=.07,
-  delay=0
+frequency,
+duration,
+type="sine",
+gain=.07,
+delay=0
 ){
 
-  if(!soundOn) return;
+if(!soundOn)
+return;
 
-  ensureAudio();
+ensureAudio();
 
-  if(!audioCtx) return;
+if(!audioCtx)
+return;
 
-  const t =
-    audioCtx.currentTime + delay;
+const t =
+audioCtx.currentTime+
+delay;
 
-  const o =
-    audioCtx.createOscillator();
+const oscillator =
+audioCtx.createOscillator();
 
-  const g =
-    audioCtx.createGain();
+const volume =
+audioCtx.createGain();
 
-  o.type = type;
+oscillator.type =
+type;
 
-  o.frequency.setValueAtTime(
-    freq,
-    t
-  );
+oscillator.frequency.setValueAtTime(
+frequency,
+t
+);
 
-  g.gain.setValueAtTime(
-    .0001,
-    t
-  );
+volume.gain.setValueAtTime(
+.0001,
+t
+);
 
-  g.gain.exponentialRampToValueAtTime(
-    gain,
-    t + .01
-  );
+volume.gain.exponentialRampToValueAtTime(
+gain,
+t+.01
+);
 
-  g.gain.exponentialRampToValueAtTime(
-    .0001,
-    t + duration
-  );
+volume.gain.exponentialRampToValueAtTime(
+.0001,
+t+duration
+);
 
-  o.connect(g);
+oscillator.connect(volume);
 
-  g.connect(
-    audioCtx.destination
-  );
+volume.connect(
+audioCtx.destination
+);
 
-  o.start(t);
+oscillator.start(t);
 
-  o.stop(
-    t + duration + .03
-  );
+oscillator.stop(
+t+duration+.03
+);
 
 }
 
 
-function popSound(lines=1){
+function popSound(lines){
 
-  if(!soundOn) return;
+tone(
+300+lines*80,
+.10,
+"square",
+.07
+);
 
-  tone(
-    260 + lines * 70,
-    .09,
-    'square',
-    .08
-  );
-
-  tone(
-    520 + lines * 90,
-    .12,
-    'sine',
-    .06,
-    .06
-  );
+tone(
+600+lines*100,
+.13,
+"sine",
+.06,
+.07
+);
 
 }
 
 
 function comboSound(c){
 
-  if(!soundOn) return;
+tone(
+500+c*70,
+.10,
+"triangle",
+.08
+);
 
-  tone(
-    500 + c * 70,
-    .10,
-    'triangle',
-    .08
-  );
-
-  tone(
-    700 + c * 90,
-    .14,
-    'triangle',
-    .07,
-    .08
-  );
+tone(
+800+c*90,
+.15,
+"triangle",
+.07,
+.08
+);
 
 }
 
 
 function gameOverSound(){
 
-  if(!soundOn) return;
+tone(
+300,
+.16,
+"sawtooth",
+.06
+);
 
-  tone(
-    300,
-    .16,
-    'sawtooth',
-    .06
-  );
+tone(
+220,
+.20,
+"sawtooth",
+.05,
+.15
+);
 
-  tone(
-    220,
-    .22,
-    'sawtooth',
-    .05,
-    .15
-  );
-
-  tone(
-    140,
-    .30,
-    'sawtooth',
-    .04,
-    .35
-  );
+tone(
+140,
+.28,
+"sawtooth",
+.04,
+.32
+);
 
 }
 
 
 function levelUpSound(){
 
-  if(!soundOn) return;
+tone(
+500,
+.10,
+"sine",
+.07
+);
 
-  tone(
-    500,
-    .10,
-    'sine',
-    .07
-  );
+tone(
+700,
+.10,
+"sine",
+.07,
+.10
+);
 
-  tone(
-    700,
-    .10,
-    'sine',
-    .07,
-    .10
-  );
-
-  tone(
-    1000,
-    .18,
-    'sine',
-    .08,
-    .20
-  );
+tone(
+1000,
+.18,
+"sine",
+.08,
+.20
+);
 
 }
 
 
 function excitedVoice(text){
 
-  if(!soundOn) return;
+if(!soundOn)
+return;
 
-  if(!('speechSynthesis' in window))
-    return;
+if(!("speechSynthesis" in window))
+return;
 
-  try{
+try{
 
-    speechSynthesis.cancel();
+speechSynthesis.cancel();
 
-    const u =
-      new SpeechSynthesisUtterance(text);
+const voice =
+new SpeechSynthesisUtterance(
+text
+);
 
-    u.rate = 1.15;
+voice.rate=1.15;
 
-    u.pitch = 1.35;
+voice.pitch=1.35;
 
-    u.volume = .8;
+voice.volume=.8;
 
-    speechSynthesis.speak(u);
+speechSynthesis.speak(
+voice
+);
 
-  }catch{}
+}catch{}
 
 }
 
 
 function showPop(text){
 
-  const el = $('popText');
+const el =
+$("popText");
 
-  el.textContent = text;
+el.textContent =
+text;
 
-  el.classList.remove('show');
+el.classList.remove(
+"show"
+);
 
-  void el.offsetWidth;
+void el.offsetWidth;
 
-  el.classList.add('show');
+el.classList.add(
+"show"
+);
 
 }
 
 
 /* ================= SOUND BUTTON ================= */
 
-function updateSoundButtons(){
+function updateSound(){
 
-  const icon =
-    soundOn ? '🔊' : '🔇';
+const icon =
+soundOn ? "🔊" : "🔇";
 
-  $('sound').textContent = icon;
+$("sound").textContent =
+icon;
 
-  $('homeSound').textContent = icon;
+$("homeSound").textContent =
+icon;
 
 }
 
 
 function toggleSound(){
 
-  soundOn = !soundOn;
+soundOn=!soundOn;
 
-  updateSoundButtons();
+updateSound();
 
-  if(soundOn){
+if(soundOn){
 
-    ensureAudio();
+ensureAudio();
 
-    tone(
-      700,
-      .08,
-      'sine',
-      .06
-    );
+tone(
+700,
+.08,
+"sine",
+.06
+);
 
-  }
+}
 
 }
 
 
-$('sound').onclick = toggleSound;
+$("sound").onclick =
+toggleSound;
 
-$('homeSound').onclick = toggleSound;
+$("homeSound").onclick =
+toggleSound;
 
-updateSoundButtons();
+
+/* ================= SHAPE ================= */
+
+function randomShape(){
+
+let max;
+
+if(progress.level<10)
+max=6;
+
+else if(progress.level<30)
+max=8;
+
+else if(progress.level<60)
+max=9;
+
+else
+max=shapes.length-1;
 
 
-/* ================= SHAPES ================= */
+const a =
+shapes[
+Math.floor(
+Math.random()*(max+1)
+)
+];
 
-function rnd(){
 
-  /*
-    Higher levels gradually unlock
-    more complex shapes.
-  */
+return{
 
-  let maxIndex;
+a:a.map(
+row=>row.slice()
+),
 
-  if(progress.level < 10)
-    maxIndex = 6;
+c:
+colors[
+Math.floor(
+Math.random()*colors.length
+)
+]
 
-  else if(progress.level < 30)
-    maxIndex = 8;
-
-  else if(progress.level < 60)
-    maxIndex = 9;
-
-  else
-    maxIndex = shapes.length - 1;
-
-  const a =
-    shapes[
-      Math.floor(
-        Math.random() *
-        (maxIndex + 1)
-      )
-    ];
-
-  return {
-
-    a:a.map(
-      r => r.slice()
-    ),
-
-    c:
-      colors[
-        Math.floor(
-          Math.random() *
-          colors.length
-        )
-      ]
-
-  };
+};
 
 }
 
 
 function newPieces(){
 
-  P = [
-    rnd(),
-    rnd(),
-    rnd()
-  ];
+P=[
+randomShape(),
+randomShape(),
+randomShape()
+];
 
-  drawP();
-
-}
-
-
-/* ================= FIT CHECK ================= */
-
-function fit(p,r,c){
-
-  const z = [];
-
-  for(
-    let y=0;
-    y<p.a.length;
-    y++
-  ){
-
-    for(
-      let x=0;
-      x<p.a[y].length;
-      x++
-    ){
-
-      if(p.a[y][x]){
-
-        const R = r+y;
-
-        const C = c+x;
-
-        if(
-          R<0 ||
-          R>=N ||
-          C<0 ||
-          C>=N ||
-          B[R][C]
-        ){
-
-          return null;
-
-        }
-
-        z.push([R,C]);
-
-      }
-
-    }
-
-  }
-
-  return z;
+drawPieces();
 
 }
 
 
-/* ================= FAST BOARD RENDER ================= */
+/* ================= FIT ================= */
 
-function draw(preview=[]){
+function fit(
+piece,
+r,
+c
+){
 
-  const previewSet =
-    new Set(
-      preview.map(
-        ([r,c]) => r*N+c
-      )
-    );
+const result=[];
 
-  for(let i=0;i<64;i++){
+for(
+let y=0;
+y<piece.a.length;
+y++
+){
 
-    const r =
-      Math.floor(i/N);
+for(
+let x=0;
+x<piece.a[y].length;
+x++
+){
 
-    const c =
-      i%N;
+if(piece.a[y][x]){
 
-    const el =
-      cellEls[i];
+const R=r+y;
 
-    el.className = 'cell';
+const C=c+x;
 
-    el.style.background = '';
+if(
+R<0||
+R>=N||
+C<0||
+C>=N||
+B[R][C]
+){
 
-    el.style.color = '';
+return null;
 
-    el.style.opacity = '1';
+}
 
-    el.style.boxShadow = '';
+result.push([
+R,C
+]);
 
-    if(B[r][c]){
+}
 
-      el.classList.add('filled');
+}
 
-      el.style.background =
-        B[r][c];
+}
 
-      el.style.color =
-        B[r][c];
-
-    }
-
-    if(previewSet.has(i) && sel){
-
-      el.classList.add('preview');
-
-      el.style.background =
-        sel.c;
-
-      el.style.color =
-        sel.c;
-
-    }
-
-  }
+return result;
 
 }
 
 
-/* ================= PIECES ================= */
+/* ================= FAST DRAW ================= */
 
-function drawP(){
+function draw(
+preview=[]
+){
 
-  const d = $('pieces');
+const previewSet =
+new Set(
+preview.map(
+([r,c])=>r*N+c
+)
+);
 
-  d.innerHTML = '';
+for(
+let i=0;
+i<64;
+i++
+){
 
-  P.forEach((p,i)=>{
+const r =
+Math.floor(i/N);
 
-    const e =
-      document.createElement('div');
+const c =
+i%N;
 
-    e.className = 'piece';
+const cell =
+cellEls[i];
 
-    if(p){
+cell.className =
+"cell";
 
-      const m =
-        document.createElement('div');
+cell.style.background =
+"";
 
-      m.className = 'mini';
+cell.style.color =
+"";
 
-      m.style.gridTemplateColumns =
-        `repeat(${p.a[0].length},22px)`;
+cell.style.opacity =
+"1";
 
-      p.a.forEach(row=>{
+cell.style.boxShadow =
+"";
 
-        row.forEach(v=>{
 
-          const x =
-            document.createElement('div');
+if(B[r][c]){
 
-          x.className = 'mc';
+cell.classList.add(
+"filled"
+);
 
-          if(v){
+cell.style.background =
+B[r][c];
 
-            x.style.background =
-              p.c;
-
-            x.style.color =
-              p.c;
-
-          }
-
-          else{
-
-            x.style.visibility =
-              'hidden';
-
-          }
-
-          m.appendChild(x);
-
-        });
-
-      });
-
-      e.appendChild(m);
-
-      e.onpointerdown =
-        ev => drag(ev,i);
-
-    }
-
-    d.appendChild(e);
-
-  });
+cell.style.color =
+B[r][c];
 
 }
 
 
-/* ================= CLEAR LINES ================= */
+if(
+previewSet.has(i)&&sel
+){
+
+cell.classList.add(
+"preview"
+);
+
+cell.style.background =
+sel.c;
+
+cell.style.color =
+sel.c;
+
+}
+
+}
+
+}
+
+
+/* ================= PIECES DRAW ================= */
+
+function drawPieces(){
+
+const box =
+$("pieces");
+
+box.innerHTML="";
+
+P.forEach(
+(piece,index)=>{
+
+const el =
+document.createElement(
+"div"
+);
+
+el.className =
+"piece";
+
+if(piece){
+
+const mini =
+document.createElement(
+"div"
+);
+
+mini.className =
+"mini";
+
+mini.style.gridTemplateColumns =
+`repeat(${piece.a[0].length},22px)`;
+
+
+piece.a.forEach(
+row=>{
+
+row.forEach(
+value=>{
+
+const block =
+document.createElement(
+"div"
+);
+
+block.className =
+"mc";
+
+if(value){
+
+block.style.background =
+piece.c;
+
+block.style.color =
+piece.c;
+
+}else{
+
+block.style.visibility =
+"hidden";
+
+}
+
+mini.appendChild(
+block
+);
+
+});
+
+});
+
+el.appendChild(
+mini
+);
+
+el.onpointerdown =
+event =>
+startDrag(
+event,
+index
+);
+
+}
+
+box.appendChild(
+el
+);
+
+});
+
+}
+
+
+/* ================= CLEAR ================= */
 
 function clearLines(){
 
-  const R = [];
+const rows=[];
 
-  const C = [];
+const cols=[];
 
-  for(let r=0;r<N;r++){
 
-    if(
-      B[r].every(Boolean)
-    )
-      R.push(r);
+for(
+let r=0;
+r<N;
+r++
+){
 
-  }
+if(
+B[r].every(Boolean)
+)
+rows.push(r);
 
-  for(let c=0;c<N;c++){
+}
 
-    if(
-      B.every(
-        row => row[c]
-      )
-    )
-      C.push(c);
 
-  }
+for(
+let c=0;
+c<N;
+c++
+){
 
-  R.forEach(
-    r => B[r].fill(null)
-  );
+if(
+B.every(
+row=>row[c]
+)
+)
+cols.push(c);
 
-  C.forEach(
-    c =>
-      B.forEach(
-        row => row[c]=null
-      )
-  );
+}
 
-  return R.length + C.length;
+
+rows.forEach(
+r=>B[r].fill(null)
+);
+
+cols.forEach(
+c=>
+B.forEach(
+row=>row[c]=null
+)
+);
+
+
+return rows.length+
+cols.length;
 
 }
 
 
 /* ================= ANY MOVE ================= */
 
-function any(){
+function anyMove(){
 
-  for(
-    const p of P
-  ){
+for(
+const piece of P
+){
 
-    if(!p) continue;
+if(!piece)
+continue;
 
-    for(
-      let r=0;
-      r<N;
-      r++
-    ){
+for(
+let r=0;
+r<N;
+r++
+){
 
-      for(
-        let c=0;
-        c<N;
-        c++
-      ){
+for(
+let c=0;
+c<N;
+c++
+){
 
-        if(
-          fit(p,r,c)
-        )
-          return true;
+if(
+fit(piece,r,c)
+)
+return true;
 
-      }
+}
 
-    }
+}
 
-  }
+}
 
-  return false;
+return false;
 
 }
 
 
 /* ================= BEST ================= */
 
-function best(){
+function updateBest(){
 
-  const k =
-    'best_' + user.uid;
+if(!user)
+return 0;
 
-  const old =
-    +localStorage.getItem(k) || 0;
+const key =
+"best_"+user.uid;
 
-  if(score > old){
+const old =
+Number(
+localStorage.getItem(key)
+)||0;
 
-    localStorage.setItem(
-      k,
-      score
-    );
+if(score>old){
 
-  }
+localStorage.setItem(
+key,
+String(score)
+);
 
-  const b =
-    Math.max(score,old);
+}
 
-  $('best').textContent = b;
+const bestScore =
+Math.max(
+score,
+old
+);
 
-  $('hb').textContent = b;
+$("best").textContent =
+bestScore;
 
-  return b;
+$("hb").textContent =
+bestScore;
+
+return bestScore;
 
 }
 
 
 /* ================= GAME OVER ================= */
 
-function end(){
+function gameOver(){
 
-  const b = best();
+const bestScore =
+updateBest();
 
-  $('fs').textContent =
-    score;
+$("fs").textContent =
+score;
 
-  $('fb').textContent =
-    b;
+$("fb").textContent =
+bestScore;
 
-  $('fl').textContent =
-    progress.level;
+$("fl").textContent =
+progress.level;
 
-  gameOverSound();
+gameOverSound();
 
-  $('over')
-    .classList.remove('hidden');
+$("over")
+.classList.remove(
+"hidden"
+);
 
 }
 
 
-/* ================= DRAG ENGINE ================= */
+/* ================= SMOOTH DRAG ================= */
 
-let sel = null;
+function startDrag(
+event,
+index
+){
 
+if(!P[index])
+return;
 
-function drag(ev,i){
+event.preventDefault();
 
-  if(!P[i])
-    return;
+ensureAudio();
 
-  ev.preventDefault();
+sel=P[index];
 
-  ensureAudio();
 
-  sel = P[i];
+const board =
+$("board");
 
-  const board =
-    $('board');
+const rect =
+board.getBoundingClientRect();
 
-  /*
-    Board position is calculated
-    only ONCE when dragging starts.
-  */
+const cellSize =
+rect.width/N;
 
-  const rect =
-    board.getBoundingClientRect();
+let lastRow=null;
 
-  const cellSize =
-    rect.width / N;
+let lastCol=null;
 
-  let lastR = null;
 
-  let lastC = null;
+function target(e){
 
-  let lastPreview = [];
+const col =
+Math.floor(
+(e.clientX-rect.left)/
+cellSize-
+sel.a[0].length/2
+);
 
+const row =
+Math.floor(
+(e.clientY-rect.top)/
+cellSize-
+sel.a.length/2
+);
 
-  function getTarget(e){
-
-    const c =
-      Math.floor(
-        (e.clientX - rect.left) /
-        cellSize -
-        sel.a[0].length / 2
-      );
-
-    const r =
-      Math.floor(
-        (e.clientY - rect.top) /
-        cellSize -
-        sel.a.length / 2
-      );
-
-    return {r,c};
-
-  }
-
-
-  function move(e){
-
-    const {r,c} =
-      getTarget(e);
-
-    /*
-      Most important optimization:
-      don't redraw when pointer remains
-      inside the same target cell.
-    */
-
-    if(
-      r === lastR &&
-      c === lastC
-    )
-      return;
-
-    lastR = r;
-
-    lastC = c;
-
-    const z =
-      fit(sel,r,c);
-
-    lastPreview =
-      z || [];
-
-    draw(lastPreview);
-
-  }
-
-
-  function up(e){
-
-    removeEventListener(
-      'pointermove',
-      move
-    );
-
-    removeEventListener(
-      'pointerup',
-      up
-    );
-
-    const {r,c} =
-      getTarget(e);
-
-    const z =
-      fit(sel,r,c);
-
-    if(!z){
-
-      sel = null;
-
-      draw();
-
-      return;
-
-    }
-
-
-    /* PLACE BLOCK */
-
-    z.forEach(
-      ([R,C]) =>
-        B[R][C] = sel.c
-    );
-
-
-    /*
-      Placement score:
-      5 points per block.
-    */
-
-    score +=
-      z.length * 5;
-
-
-    /*
-      XP for successfully placing.
-    */
-
-    addXP(
-      z.length * 2
-    );
-
-
-    /* CLEAR */
-
-    const n =
-      clearLines();
-
-
-    if(n){
-
-      combo++;
-
-      let lineScore = 0;
-
-      if(n===1)
-        lineScore = 100;
-
-      else if(n===2)
-        lineScore = 250;
-
-      else if(n===3)
-        lineScore = 450;
-
-      else
-        lineScore = 700;
-
-
-      score +=
-        lineScore;
-
-
-      /*
-        Combo bonus.
-      */
-
-      if(combo===2)
-        score += 50;
-
-      else if(combo===3)
-        score += 100;
-
-      else if(combo>=4)
-        score += 200;
-
-
-      /*
-        XP for clearing lines.
-      */
-
-      let xp = 0;
-
-      if(n===1)
-        xp = 20;
-
-      else if(n===2)
-        xp = 50;
-
-      else if(n===3)
-        xp = 90;
-
-      else
-        xp = 140;
-
-
-      if(combo===2)
-        xp += 15;
-
-      else if(combo===3)
-        xp += 30;
-
-      else if(combo>=4)
-        xp += 50;
-
-
-      addXP(xp);
-
-
-      popSound(n);
-
-
-      if(combo>=2){
-
-        comboSound(combo);
-
-        showPop(
-          `🔥 COMBO ×${combo}!`
-        );
-
-        excitedVoice(
-          combo>=4 ?
-          'Awesome!' :
-          combo>=3 ?
-          'Great!' :
-          'Nice!'
-        );
-
-      }
-      else{
-
-        showPop(
-          n>=3 ?
-          '🔥 AMAZING!' :
-          '💥 NICE!'
-        );
-
-        excitedVoice(
-          n>=3 ?
-          'Awesome!' :
-          'Nice!'
-        );
-
-      }
-
-    }
-    else{
-
-      combo = 0;
-
-    }
-
-
-    $('score').textContent =
-      score;
-
-    $('combo').textContent =
-      combo;
-
-
-    P[i] = null;
-
-    sel = null;
-
-
-    if(
-      P.every(
-        x => !x
-      )
-    ){
-
-      newPieces();
-
-    }
-    else{
-
-      drawP();
-
-    }
-
-
-    draw();
-
-
-    /*
-      Check game over AFTER move.
-    */
-
-    if(!any())
-      end();
-
-  }
-
-
-  addEventListener(
-    'pointermove',
-    move,
-    {passive:false}
-  );
-
-  addEventListener(
-    'pointerup',
-    up,
-    {once:true}
-  );
+return{
+row,
+col
+};
 
 }
 
 
-/* ================= START GAME ================= */
+function move(e){
 
-function start(){
+e.preventDefault();
 
-  ensureAudio();
+const {
+row,
+col
+}=target(e);
 
-  B = empty();
 
-  P = [];
+if(
+row===lastRow&&
+col===lastCol
+)
+return;
 
-  score = 0;
 
-  combo = 0;
+lastRow=row;
 
-  $('score').textContent =
-    '0';
+lastCol=col;
 
-  $('combo').textContent =
-    '0';
 
-  $('best').textContent =
-    localStorage.getItem(
-      'best_' + user.uid
-    ) || '0';
+const preview =
+fit(
+sel,
+row,
+col
+);
 
-  updateProgressUI();
 
-  newPieces();
+draw(
+preview||[]
+);
 
-  draw();
+}
 
-  $('over')
-    .classList.add('hidden');
+
+function release(e){
+
+e.preventDefault();
+
+window.removeEventListener(
+"pointermove",
+move
+);
+
+window.removeEventListener(
+"pointerup",
+release
+);
+
+
+const {
+row,
+col
+}=target(e);
+
+
+const placed =
+fit(
+sel,
+row,
+col
+);
+
+
+if(!placed){
+
+sel=null;
+
+draw();
+
+return;
+
+}
+
+
+/* PLACE */
+
+placed.forEach(
+([r,c])=>{
+B[r][c]=sel.c;
+}
+);
+
+
+/* SCORE */
+
+score +=
+placed.length*5;
+
+
+/* XP */
+
+addXP(
+placed.length*2
+);
+
+
+/* CLEAR */
+
+const lines =
+clearLines();
+
+
+if(lines){
+
+combo++;
+
+
+let lineScore;
+
+if(lines===1)
+lineScore=100;
+
+else if(lines===2)
+lineScore=250;
+
+else if(lines===3)
+lineScore=450;
+
+else
+lineScore=700;
+
+
+score+=lineScore;
+
+
+if(combo===2)
+score+=50;
+
+else if(combo===3)
+score+=100;
+
+else if(combo>=4)
+score+=200;
+
+
+let xp;
+
+if(lines===1)
+xp=20;
+
+else if(lines===2)
+xp=50;
+
+else if(lines===3)
+xp=90;
+
+else
+xp=140;
+
+
+if(combo===2)
+xp+=15;
+
+else if(combo===3)
+xp+=30;
+
+else if(combo>=4)
+xp+=50;
+
+
+addXP(xp);
+
+popSound(lines);
+
+
+if(combo>=2){
+
+comboSound(combo);
+
+showPop(
+`🔥 COMBO ×${combo}!`
+);
+
+excitedVoice(
+combo>=4 ?
+"Awesome!" :
+combo>=3 ?
+"Great!" :
+"Nice!"
+);
+
+}else{
+
+showPop(
+lines>=3 ?
+"🔥 AMAZING!" :
+"💥 NICE!"
+);
+
+excitedVoice(
+lines>=3 ?
+"Awesome!" :
+"Nice!"
+);
+
+}
+
+}else{
+
+combo=0;
+
+}
+
+
+$("score").textContent =
+score;
+
+$("combo").textContent =
+combo;
+
+
+P[index]=null;
+
+sel=null;
+
+
+if(
+P.every(
+x=>!x
+)
+){
+
+newPieces();
+
+}else{
+
+drawPieces();
+
+}
+
+
+draw();
+
+
+if(
+!anyMove()
+){
+
+gameOver();
+
+}
+
+}
+
+
+window.addEventListener(
+"pointermove",
+move,
+{passive:false}
+);
+
+window.addEventListener(
+"pointerup",
+release,
+{once:true}
+);
+
+}
+
+
+/* ================= START ================= */
+
+function startGame(){
+
+ensureAudio();
+
+B=empty();
+
+P=[];
+
+score=0;
+
+combo=0;
+
+sel=null;
+
+$("score").textContent="0";
+
+$("combo").textContent="0";
+
+$("best").textContent =
+localStorage.getItem(
+"best_"+user.uid
+)||"0";
+
+updateProgress();
+
+newPieces();
+
+draw();
+
+$("over")
+.classList.add("hidden");
 
 }
 
 
 /* ================= AUTH STATE ================= */
 
+if(auth){
+
 onAuthStateChanged(
-  auth,
-  u => {
+auth,
+currentUser=>{
 
-    user = u;
+user=currentUser;
 
-    if(u){
+if(currentUser){
 
-      $('auth')
-        .classList.add('hidden');
-
-      $('home')
-        .classList.remove('hidden');
-
-      $('uname').textContent =
-        u.displayName ||
-        u.email.split('@')[0];
-
-      $('hb').textContent =
-        localStorage.getItem(
-          'best_' + u.uid
-        ) || '0';
-
-      loadProgress();
-
-    }
-    else{
-
-      $('auth')
-        .classList.remove('hidden');
-
-      $('home')
-        .classList.add('hidden');
-
-      $('game')
-        .classList.add('hidden');
-
-    }
-
-  }
+$("auth")
+.classList.add(
+"hidden"
 );
+
+$("home")
+.classList.remove(
+"hidden"
+);
+
+$("game")
+.classList.add(
+"hidden"
+);
+
+$("uname").textContent =
+currentUser.displayName ||
+currentUser.email.split("@")[0];
+
+$("hb").textContent =
+localStorage.getItem(
+"best_"+currentUser.uid
+)||"0";
+
+loadProgress();
+
+}else{
+
+$("auth")
+.classList.remove(
+"hidden"
+);
+
+$("home")
+.classList.add(
+"hidden"
+);
+
+$("game")
+.classList.add(
+"hidden"
+);
+
+}
+
+}
+);
+
+}
 
 
 /* ================= NAVIGATION ================= */
 
-$('play').onclick = () => {
+$("play").onclick=()=>{
 
-  $('home')
-    .classList.add('hidden');
+$("home")
+.classList.add(
+"hidden"
+);
 
-  $('game')
-    .classList.remove('hidden');
+$("game")
+.classList.remove(
+"hidden"
+);
 
-  start();
-
-};
-
-
-$('new').onclick =
-  start;
-
-
-$('gh').onclick = () => {
-
-  $('game')
-    .classList.add('hidden');
-
-  $('home')
-    .classList.remove('hidden');
+startGame();
 
 };
 
 
-$('again').onclick =
-  start;
+$("new").onclick =
+startGame;
 
 
-$('oh').onclick = () => {
+$("gh").onclick=()=>{
 
-  $('over')
-    .classList.add('hidden');
+$("game")
+.classList.add(
+"hidden"
+);
 
-  $('game')
-    .classList.add('hidden');
+$("home")
+.classList.remove(
+"hidden"
+);
 
-  $('home')
-    .classList.remove('hidden');
+};
+
+
+$("again").onclick =
+startGame;
+
+
+$("oh").onclick=()=>{
+
+$("over")
+.classList.add(
+"hidden"
+);
+
+$("game")
+.classList.add(
+"hidden"
+);
+
+$("home")
+.classList.remove(
+"hidden"
+);
 
 };
 
@@ -2016,16 +2418,22 @@ $('oh').onclick = () => {
 /* ================= PWA ================= */
 
 if(
-  'serviceWorker' in navigator
+"serviceWorker" in navigator
 ){
 
-  navigator.serviceWorker.register(
-    './sw.js'
-  );
+navigator.serviceWorker.register(
+"./sw.js"
+).catch(
+error=>{
+console.log(
+"SW Error:",
+error
+);
+});
 
 }
 
 </script>
 
 </body>
-    </html>
+  </html>
